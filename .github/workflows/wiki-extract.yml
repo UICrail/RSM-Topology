@@ -1,0 +1,17 @@
+# .github/workflows/docs-wiki.yml
+name: Docs (Wiki)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write  # if you push to wiki or to gh-pages
+  pages: write
+  id-token: write
+
+jobs:
+  wiki:
+    uses: Airy59/OntoQA/.github/workflows/docs-wiki.yml@main
+    with:
+      docs_dir: "docs/from-wiki"
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

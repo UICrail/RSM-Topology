@@ -1,0 +1,34 @@
+# Continuous integration workflow
+
+name: Ontology verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      main_ontology:
+        description: "Optional override for ontology entrypoint (else uses ontology/src/config.md)"
+        required: false
+        type: string
+      reasoner:
+        description: "Optional override for reasoner (else uses ontology/src/config.md)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    uses: Airy59/OntoQA/.github/workflows/ci.yml@main    # shared GitHub pipeline. @main tells to use latest commit.
+    with:
+      # If empty, OntoQA workflow falls back to ontology/src/config.md
+      main_ontology: ${{ inputs.main_ontology }}
+      reasoner: ${{ inputs.reasoner }}
+      shapes_glob:   ontology/shapes/**/*.ttl
+      data_glob:     ontology/data/**/*.ttl
+      # main_ontology + reasoner can also be resolved from ontology/src/config.md (YAML front matter)
+
+      # Note: workflow tags can also refer to a specific version (@v1 ...) or commit
+      # Note: we recommend using HermiT (strict DL reasoner, default in Protégé) or Pellet (DL reasoner, more relaxed on e.g. datatypes)
+      # Note: use ELK for fast EL-profile modules.
+      # Note: using reasoners other than those made available by the current ROBOT version requires setting up a specific workflow.
