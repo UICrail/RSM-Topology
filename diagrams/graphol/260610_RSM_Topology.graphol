@@ -1,0 +1,1886 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphol version="3">
+  <project name="sRSM" version="https://cdm.ovh/rsm/topology/1.0rc10/topo">
+    <ontology iri="https://cdm.ovh/rsm/topology/topo" addLabelFromUserInput="0" lang="en" addLabelFromSimpleName="0">
+      <imports>
+        <import iri="https://cdm.ovh/rsm/geosparql_adapter/rgeo" version="https://cdm.ovh/rsm/geosparql_adapter/rgeo" location="https://cdm.ovh/rsm/geosparql_adapter/rgeo" isLocal="0"/>
+      </imports>
+      <prefixes>
+        <prefix>
+          <value>dc</value>
+          <namespace>http://purl.org/dc/elements/1.1/</namespace>
+        </prefix>
+        <prefix>
+          <value>dcterms</value>
+          <namespace>http://purl.org/dc/terms/</namespace>
+        </prefix>
+        <prefix>
+          <value>dul</value>
+          <namespace>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#</namespace>
+        </prefix>
+        <prefix>
+          <value>geo</value>
+          <namespace>http://www.opengis.net/ont/geosparql#</namespace>
+        </prefix>
+        <prefix>
+          <value>list</value>
+          <namespace>https://cdm.ovh/rsm/list2/list2#</namespace>
+        </prefix>
+        <prefix>
+          <value>owl</value>
+          <namespace>http://www.w3.org/2002/07/owl#</namespace>
+        </prefix>
+        <prefix>
+          <value>rdf</value>
+          <namespace>http://www.w3.org/1999/02/22-rdf-syntax-ns#</namespace>
+        </prefix>
+        <prefix>
+          <value>rdfs</value>
+          <namespace>http://www.w3.org/2000/01/rdf-schema#</namespace>
+        </prefix>
+        <prefix>
+          <value>rgeo</value>
+          <namespace>https://cdm.ovh/rsm/geosparql_adapter/rgeo#</namespace>
+        </prefix>
+        <prefix>
+          <value>skos</value>
+          <namespace>http://www.w3.org/2004/02/skos/core#</namespace>
+        </prefix>
+        <prefix>
+          <value>topo</value>
+          <namespace>https://cdm.ovh/rsm/topology/topo#</namespace>
+        </prefix>
+        <prefix>
+          <value>xml</value>
+          <namespace>http://www.w3.org/XML/1998/namespace</namespace>
+        </prefix>
+        <prefix>
+          <value>xsd</value>
+          <namespace>http://www.w3.org/2001/XMLSchema#</namespace>
+        </prefix>
+      </prefixes>
+      <datatypes>
+        <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</datatype>
+        <datatype>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</datatype>
+        <datatype>http://www.w3.org/2000/01/rdf-schema#Literal</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#NCName</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#NMTOKEN</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#Name</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#anyURI</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#base64Binary</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#boolean</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#byte</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#dateTime</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#dateTimeStamp</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#decimal</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#double</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#float</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#hexBinary</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#int</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#integer</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#language</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#long</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#negativeInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#nonNegativeInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#nonPositiveInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#normalizedString</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#positiveInteger</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#short</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#string</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#token</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedByte</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedInt</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedLong</datatype>
+        <datatype>http://www.w3.org/2001/XMLSchema#unsignedShort</datatype>
+        <datatype>http://www.w3.org/2002/07/owl#rational</datatype>
+        <datatype>http://www.w3.org/2002/07/owl#real</datatype>
+      </datatypes>
+      <languages>
+        <language>de</language>
+        <language>en</language>
+        <language>es</language>
+        <language>fr</language>
+        <language>it</language>
+      </languages>
+      <facets>
+        <facet>http://www.w3.org/2001/XMLSchema#langRange</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#length</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#maxExclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#maxInclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#maxLength</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#minExclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#minInclusive</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#minLength</facet>
+        <facet>http://www.w3.org/2001/XMLSchema#pattern</facet>
+      </facets>
+      <annotationProperties>
+        <annotationProperty>http://purl.org/dc/elements/1.1/abstract</annotationProperty>
+        <annotationProperty>http://purl.org/dc/elements/1.1/contributor</annotationProperty>
+        <annotationProperty>http://purl.org/dc/elements/1.1/creator</annotationProperty>
+        <annotationProperty>http://purl.org/dc/elements/1.1/date</annotationProperty>
+        <annotationProperty>http://purl.org/dc/elements/1.1/description</annotationProperty>
+        <annotationProperty>http://purl.org/dc/elements/1.1/relation</annotationProperty>
+        <annotationProperty>http://purl.org/dc/elements/1.1/title</annotationProperty>
+        <annotationProperty>http://purl.org/dc/elements/1.1/type</annotationProperty>
+        <annotationProperty>http://purl.org/dc/terms/license</annotationProperty>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#backwardCompatibleWith</annotationProperty>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#comment</annotationProperty>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#isDefinedBy</annotationProperty>
+        <annotationProperty>http://www.w3.org/2000/01/rdf-schema#label</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#backwardCompatibleWith</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#deprecated</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#incompatibleWith</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#priorVersion</annotationProperty>
+        <annotationProperty>http://www.w3.org/2002/07/owl#versionInfo</annotationProperty>
+        <annotationProperty>http://www.w3.org/2004/02/skos/core#definition</annotationProperty>
+        <annotationProperty>https://vocab.org/vann/preferredNamespacePrefix</annotationProperty>
+        <annotationProperty>https://vocab.org/vann/preferredNamespaceURI</annotationProperty>
+      </annotationProperties>
+      <iris>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/abstract</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/contributor</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/creator</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/date</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/description</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/relation</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/title</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/elements/1.1/type</value>
+        </iri>
+        <iri>
+          <value>http://purl.org/dc/terms/license</value>
+        </iri>
+        <iri>
+          <value>http://www.opengis.net/ont/geosparql#Feature</value>
+        </iri>
+        <iri>
+          <value>http://www.opengis.net/ont/geosparql#Geometry</value>
+        </iri>
+        <iri>
+          <value>http://www.opengis.net/ont/geosparql#SpatialObject</value>
+        </iri>
+        <iri>
+          <value>http://www.opengis.net/ont/geosparql#hasDefaultGeometry</value>
+        </iri>
+        <iri>
+          <value>http://www.opengis.net/ont/geosparql#hasGeometry</value>
+        </iri>
+        <iri>
+          <value>http://www.opengis.net/ont/geosparql#hasMetricLength</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#Literal</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#backwardCompatibleWith</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#comment</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#isDefinedBy</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2000/01/rdf-schema#label</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#NCName</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#NMTOKEN</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#Name</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#anyURI</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#base64Binary</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#boolean</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#byte</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#dateTime</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#dateTimeStamp</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#decimal</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#double</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#float</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#hexBinary</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#int</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#integer</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#langRange</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#language</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#length</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#long</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#maxExclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#maxInclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#maxLength</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#minExclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#minInclusive</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#minLength</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#negativeInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#nonNegativeInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#nonPositiveInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#normalizedString</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#pattern</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#positiveInteger</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#short</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#string</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#token</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedByte</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedInt</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedLong</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2001/XMLSchema#unsignedShort</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#Nothing</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#Thing</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#backwardCompatibleWith</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#bottomDataProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#bottomObjectProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#deprecated</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#incompatibleWith</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#priorVersion</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#rational</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#real</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#topDataProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#topObjectProperty</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2002/07/owl#versionInfo</value>
+        </iri>
+        <iri>
+          <value>http://www.w3.org/2004/02/skos/core#definition</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#Feature</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#Geometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#LinearThings</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#geometryOf</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#hasGeometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#hasMetricLength</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#hasNominalGeometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#hasNominalMetricLength</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geo_ad#nominalGeometryOf</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geosparql_adapter#Geometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geosparql_adapter#geometryOf</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geosparql_adapter#hasGeometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geosparql_adapter#hasMetricLength</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geosparql_adapter#hasNominalGeometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geosparql_adapter#hasNominalMetricLength</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/adapters/geosparql_adapter/geosparql_adapter#nominalGeometryOf</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/list2/list2#OWLList</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/localisation/loca#BaseLocation</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/localisation/loca#LinearLocation</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/localisation/localisation#BaseLocation</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/localisation/localisation#LinearLocation</value>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/elements/1.1/title</property>
+              <object>
+                <lexicalForm>RSM topology</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/elements/1.1/creator</property>
+              <object>
+                <lexicalForm>Airy Magnien, UIC</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/terms/license</property>
+              <object>
+                <iri>https://creativecommons.org/licenses/by-sa/4.0/</iri>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/elements/1.1/contributor</property>
+              <object>
+                <lexicalForm>Pierre Tane, UIC</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/elements/1.1/date</property>
+              <object>
+                <lexicalForm>10 June 2026</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/elements/1.1/type</property>
+              <object>
+                <lexicalForm>RDF/OWL ontology (using OWL2 RL profile)</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>https://vocab.org/vann/preferredNamespacePrefix</property>
+              <object>
+                <lexicalForm>topo</lexicalForm>
+                <datatype/>
+                <language/>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>https://vocab.org/vann/preferredNamespaceURI</property>
+              <object>
+                <lexicalForm>http://cdm.ovh/rsm/topology/topo#</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo</subject>
+              <property>http://purl.org/dc/elements/1.1/description</property>
+              <object>
+                <lexicalForm>Full RSM topology. Connexities and Navigabilities as object properties . Additionally, navigability reification is included. Temporal aspects to be covered by annotations and/or named graphs and/or dul:Situations, or similar.
+
+Syntactic sugar: some properties that are most likely to be used are chained properties, equivalent to derived associations in UML.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo</subject>
+              <property>http://purl.org/dc/elements/1.1/abstract</property>
+              <object>
+                <lexicalForm>RSM topology provides fundamental railway network description, focused on connections and navigabilities between net elements. Net elements can be linear (embodied by lines or tracks) or non linear (embodied by stations, yards, or wider network areas). Geometry aspects are delegated to GeoSPARQL and are not essential to topology. Functional aspects (such as "current switch setting") also are not part of the topology.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo</subject>
+              <property>http://www.w3.org/2002/07/owl#versionInfo</property>
+              <object>
+                <lexicalForm>Reification limited to navigableTo property. Added property oppositePort as a property chain, and related properties.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo</subject>
+              <property>http://www.w3.org/2002/07/owl#versionInfo</property>
+              <object>
+                <lexicalForm>1.0rc8 : Existential restriction added on fromPort and toPort properties.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo</subject>
+              <property>http://www.w3.org/2002/07/owl#versionInfo</property>
+              <object>
+                <lexicalForm>error correction: navigableFromTransitive was not marked transitive</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo</subject>
+              <property>http://www.w3.org/2002/07/owl#versionInfo</property>
+              <object>
+                <lexicalForm>1.0rc9:
+navigableFromTransitive characteristic "transitive" was missing.
+LeadsTo renamed LeadsToNext and LeadsToTransitive to LeadsTo (which, by the way, is not transitive).
+property chain removed (likely cause of reasoner crashes)</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo</subject>
+              <property>http://www.w3.org/2002/07/owl#versionInfo</property>
+              <object>
+                <lexicalForm>1.0rc10: Restored functional property characteristics for fromPort and toPort. Removed property chain linking navigableTo with reified navigability (DL profile violation). Removed useless leadsToNext property.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#BoundaryElement</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#BoundaryElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Boundary element</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#BoundaryElement</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>Linear element with length = 0. It still has two distinct ports, allowing to express connectivity and navigability (without losing directional information or the possibility to restrict navigation to a single direction). To be used at the borders of networks managed by different entities.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#LinearElement</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#LinearElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Linear element</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#LinearElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>Any topology element that has exactly two extremities or " ports".</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#ListedPort</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#ListedPort</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Listed port</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#ListedPort</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>A port in an ordered list (with successors; no contents needed). Can be used to sort the ports of a non-linear net element (e.g. clockwise from northmost). See also List ontology.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#Navigability</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#Navigability</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Navigability</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#Navigability</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>Reified navigability relation. It is oriented (from port - to port); see navigableTo property for details.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#Navigability</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>Note: non-navigability and connexity reification are not proposed here, assuming that:
+1. the authority lies with the properties (navigableTo, nonNavigableTo, connectedWith), and
+2. navigabilities as individuals are useful for further modelling (switches...), while non-navigabilities and connexities as individuals do not appear to be equally useful.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#NetElement</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#NetElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Net element</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#NetElement</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>Superclass for net elements (network elements)</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#NonlinearElement</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#NonlinearElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Nonlinear element</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#NonlinearElement</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>Net element with any number of ports except two. Used for expressing connexities and navigabilities from or to a complex network area (e.g. a yard or a station).</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#Port</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#Port</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>Port</lexicalForm>
+                <datatype/>
+                <language/>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#Port</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>Any place, at the boundary of a net element, that can be an entry and/or exit point for rolling stock. In the case of linear elements, there are exactly two ports. In the case of a loop, the two ports of the loop ports coincide geographically (but for some tolerances) but remain distinct individuals, allowing to orient the loop if need be.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#connectedWith</value>
+          <symmetric/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#connectedWith</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>connected with</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#connectedWith</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>Relation between a port on a net element and an adjacent port on another net element. This is a symmetric relation. Geographic locations of related ports may not coincide exactly, either because of constructive tolerances (abutted tracks...), or uncertainties, or rounding errors, or by construction (e.g. case of tracks joined via a turntable).</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#connectedWithTransitive</value>
+          <transitive/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#connectedWithTransitive</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>connected with transitive</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#connectedWithTransitive</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>transitive closure of connectedWith.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#destinationOfNavigability</value>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#destinationOfNavigability</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>destination of navigability</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#fromPort</value>
+          <functional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#fromPort</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>from port</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#fromPort</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>Port from which the navigability relation starts: conventionally, the "exit port" from which a running train leaves a net element.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#leadsTo</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#leadsTo</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>leads to</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#leadsTo</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>relation between net elements (adjacent or not), where rolling stock may leave an element (subject) and reach another element (object) without reversing travel direction. This property is derived from navigableToTransitive, but is itself not transitive.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#navigableFrom</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableFrom</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>navigable from</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableFrom</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>inverse of navigable to</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#navigableFromTransitive</value>
+          <transitive/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableFromTransitive</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>navigable from transitive</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableFromTransitive</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>inverse of navigable to transitive</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#navigableTo</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableTo</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>navigable to</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableTo</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>Expresses the possibility, for a train movement, to leave a net element via an exit port and to navigate to another net element until another exit port. Here, navigation excludes reversal of travel direction, even if the reversal is otherwise allowed by operational rules (e.g. shunting mode, ...).</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#navigableToTransitive</value>
+          <transitive/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableToTransitive</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>navigable to transitive</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#navigableToTransitive</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>transitive closure of navigableTo</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#nonNavigableFrom</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#nonNavigableFrom</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>non navigable from</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#nonNavigableFrom</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>inverse of non navigable to</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#nonNavigableTo</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#nonNavigableTo</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>non navigable to</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#nonNavigableTo</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>Expresses that there is no navigability link between the related ports. Given the OWA (open world assumption), a navigability not expressed does not mean "non navigability". Consequently, non-navigability should be explicitly stated when it is known, as it is fundamental knowledge about the network layout.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#onElement</value>
+          <functional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#onElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>on element</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#onElement</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>inverse of port, port0, port1</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#oppositePort</value>
+          <symmetric/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#oppositePort</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>opposite port</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#oppositePort</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>Opposite port on a linear element; a symmetric property. Not meaningful if element is non-linear.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#originOfNavigability</value>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#originOfNavigability</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>origin of navigability</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#port</value>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>port</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>Associated ports with net elements. This is an inverse functional property, meaning that a port can belong to at most one net element (if a port is found to belong to two net elements, the inference is that those two elements are the same).</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#port0</value>
+          <functional/>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port0</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>port 0</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port0</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>First port of some net element. Allows to orient linear elements in space, even though linear elements may be completely symmetrical from a functional point of view. Linear element orientation can be arbitray, or become a matter of conventions. This property also be used on non-linear elements, with undefined semantics.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#port0onElement</value>
+          <functional/>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port0onElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>port0on element</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#port1</value>
+          <functional/>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port1</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>port 1</lexicalForm>
+                <datatype/>
+                <language/>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port1</subject>
+              <property>http://www.w3.org/2004/02/skos/core#definition</property>
+              <object>
+                <lexicalForm>points to the other port of a linear element. Only meaningful for linear elements.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#port1onElement</value>
+          <functional/>
+          <inverseFunctional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#port1onElement</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>port1on element</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topo#toPort</value>
+          <functional/>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#toPort</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#label</property>
+              <object>
+                <lexicalForm>to port</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topo#toPort</subject>
+              <property>http://www.w3.org/2000/01/rdf-schema#comment</property>
+              <object>
+                <lexicalForm>Designates the exit port a running train can reach on a net element. Note: the entry port on that element is provided by a connectedTo property.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topology</value>
+          <annotations>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/elements/1.1/abstract</property>
+              <object>
+                <lexicalForm>Full RSM topology; relations between ports are only available as classes (possibly temporal objects) as well as object properties (possibly with temporal annotations, using RDF+).
+
+Syntactic sugar: some properties that are most likely to be used are chained properties, equivalent to derived associations in UML.
+
+Temporality to be expressed using an upper ontology, such as DOLCE+DNS Ultralite.</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>http://purl.org/dc/elements/1.1/date</property>
+              <object>
+                <lexicalForm>23 December 2025</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>https://vocab.org/vann/preferredNamespacePrefix</property>
+              <object>
+                <lexicalForm>topo</lexicalForm>
+                <datatype/>
+                <language/>
+              </object>
+            </annotation>
+            <annotation>
+              <subject>https://cdm.ovh/rsm/topology/topology</subject>
+              <property>https://vocab.org/vann/preferredNamespaceURI</property>
+              <object>
+                <lexicalForm>http://cdm.ovh/rsm/topology/topo#</lexicalForm>
+                <datatype/>
+                <language>en</language>
+              </object>
+            </annotation>
+          </annotations>
+        </iri>
+        <iri>
+          <value>https://cdm.ovh/rsm/topology/topology#LinearElement</value>
+        </iri>
+        <iri>
+          <value>https://creativecommons.org/licenses/by-sa/4.0/</value>
+        </iri>
+        <iri>
+          <value>https://vocab.org/vann/preferredNamespacePrefix</value>
+        </iri>
+        <iri>
+          <value>https://vocab.org/vann/preferredNamespaceURI</value>
+        </iri>
+        <iri>
+          <value>urn:x-graphol:origin</value>
+        </iri>
+      </iris>
+    </ontology>
+    <diagrams>
+      <diagram width="5000" height="5000" name="property chains">
+        <node color="#fcfcfc" type="role" id="n12">
+          <geometry height="50" width="70" y="90" x="50"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port</iri>
+          <label height="23" width="29" y="60" x="50" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n13">
+          <geometry height="50" width="70" y="90" x="250"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#onElement</iri>
+          <label height="23" width="64" y="60" x="250" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" inputs="e8,e14,e15" type="role-chain" id="n14">
+          <geometry height="30" width="50" y="0" x="150"/>
+          <label height="23" width="36" y="0" x="150" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n17">
+          <geometry height="50" width="70" y="90" x="150"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#navigableToTransitive</iri>
+          <label height="23" width="124" y="60" x="150" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n18">
+          <geometry height="50" width="70" y="-80" x="-150"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#oppositePort</iri>
+          <label height="23" width="77" y="-110" x="-150" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" inputs="e17,e18" type="role-chain" id="n19">
+          <geometry height="30" width="50" y="0" x="-150"/>
+          <label height="23" width="36" y="0" x="-150" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n21">
+          <geometry height="50" width="70" y="90" x="-220"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port0onElement</iri>
+          <label height="23" width="93" y="60" x="-220" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n22">
+          <geometry height="50" width="70" y="90" x="-80"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port1</iri>
+          <label height="23" width="36" y="60" x="-80" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n9">
+          <geometry height="50" width="70" y="-80" x="150"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#leadsTo</iri>
+          <label height="23" width="50" y="-110" x="150" customSize="0" size="12"/>
+        </node>
+        <edge source="n14" target="n9" type="inclusion" id="e11">
+          <point y="0" x="150"/>
+          <point y="-80" x="150"/>
+        </edge>
+        <edge source="n17" target="n14" type="input" id="e14">
+          <point y="90" x="150"/>
+          <point y="0" x="150"/>
+        </edge>
+        <edge source="n13" target="n14" type="input" id="e15">
+          <point y="90" x="250"/>
+          <point y="0" x="150"/>
+        </edge>
+        <edge source="n19" target="n18" type="inclusion" id="e16">
+          <point y="0" x="-150"/>
+          <point y="-80" x="-150"/>
+        </edge>
+        <edge source="n21" target="n19" type="input" id="e17">
+          <point y="90" x="-220"/>
+          <point y="0" x="-150"/>
+        </edge>
+        <edge source="n22" target="n19" type="input" id="e18">
+          <point y="90" x="-80"/>
+          <point y="0" x="-150"/>
+        </edge>
+        <edge source="n12" target="n14" type="input" id="e8">
+          <point y="90" x="50"/>
+          <point y="0" x="150"/>
+        </edge>
+      </diagram>
+      <diagram width="5000" height="5000" name="reification">
+        <node color="#fcfcfc" type="concept" id="n0">
+          <geometry height="50" width="110" y="-80" x="180"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#Navigability</iri>
+          <label height="23" width="110" y="-80" x="180" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="concept" id="n10">
+          <geometry height="50" width="110" y="-80" x="550"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#Port</iri>
+          <label height="23" width="110" y="-80" x="550" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n4">
+          <geometry height="50" width="70" y="-140" x="370"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#fromPort</iri>
+          <label height="23" width="56" y="-170" x="370" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n5">
+          <geometry height="50" width="70" y="-20" x="370"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#toPort</iri>
+          <label height="23" width="41" y="-50" x="370" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n6">
+          <geometry height="20" width="20" y="-140" x="280"/>
+          <label height="23" width="39" y="-162" x="280" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n7">
+          <geometry height="20" width="20" y="-20" x="280"/>
+          <label height="23" width="39" y="-42" x="280" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="range-restriction" id="n8">
+          <geometry height="20" width="20" y="-140" x="460"/>
+          <label height="23" width="39" y="-162" x="460" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="range-restriction" id="n9">
+          <geometry height="20" width="20" y="-20" x="460"/>
+          <label height="23" width="39" y="-42" x="460" customSize="0" size="12">exists</label>
+        </node>
+        <edge source="n5" target="n7" type="input" id="e10">
+          <point y="-20" x="370"/>
+          <point y="-20" x="280"/>
+        </edge>
+        <edge source="n6" target="n0" type="inclusion" id="e24">
+          <point y="-140" x="280"/>
+          <point y="-80" x="180"/>
+        </edge>
+        <edge source="n7" target="n0" type="inclusion" id="e25">
+          <point y="-20" x="280"/>
+          <point y="-80" x="180"/>
+        </edge>
+        <edge source="n8" target="n10" type="inclusion" id="e3">
+          <point y="-140" x="460"/>
+          <point y="-80" x="550"/>
+        </edge>
+        <edge source="n9" target="n10" type="inclusion" id="e4">
+          <point y="-20" x="460"/>
+          <point y="-80" x="550"/>
+        </edge>
+        <edge source="n4" target="n8" type="input" id="e7">
+          <point y="-140" x="370"/>
+          <point y="-140" x="460"/>
+        </edge>
+        <edge source="n4" target="n6" type="input" id="e8">
+          <point y="-140" x="370"/>
+          <point y="-140" x="280"/>
+        </edge>
+        <edge source="n5" target="n9" type="input" id="e9">
+          <point y="-20" x="370"/>
+          <point y="-20" x="460"/>
+        </edge>
+      </diagram>
+      <diagram width="5000" height="5000" name="topology">
+        <node color="#fcfcfc" type="concept" id="n0">
+          <geometry height="50" width="115" y="-70" x="370"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#NetElement</iri>
+          <label height="28" width="115" y="-70" x="370" customSize="1" size="16"/>
+        </node>
+        <node color="#86f42e" type="concept" id="n1">
+          <geometry height="50" width="110" y="160" x="300"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#LinearElement</iri>
+          <label height="23" width="110" y="160" x="300" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n12">
+          <geometry height="50" width="70" y="200" x="-210"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#connectedWithTransitive</iri>
+          <label height="23" width="139" y="170" x="-210" customSize="0" size="12"/>
+        </node>
+        <node color="#86f42e" type="role" id="n13">
+          <geometry height="50" width="70" y="280" x="-210"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#connectedWith</iri>
+          <label height="23" width="88" y="250" x="-210" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n14">
+          <geometry height="20" width="20" y="200" x="-310"/>
+          <label height="23" width="39" y="178" x="-310" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="range-restriction" id="n15">
+          <geometry height="20" width="20" y="200" x="-110"/>
+          <label height="23" width="39" y="178" x="-110" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#86f42e" type="concept" id="n2">
+          <geometry height="50" width="120" y="160" x="440"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#NonlinearElement</iri>
+          <label height="23" width="120" y="160" x="440" customSize="0" size="12"/>
+        </node>
+        <node color="#86f42e" type="role" id="n21">
+          <geometry height="50" width="70" y="50" x="20"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port0</iri>
+          <label height="23" width="36" y="20" x="20" customSize="0" size="12"/>
+        </node>
+        <node color="#86f42e" type="role" id="n22">
+          <geometry height="50" width="70" y="50" x="200"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port1</iri>
+          <label height="23" width="36" y="20" x="200" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n26">
+          <geometry height="20" width="20" y="160" x="200"/>
+          <label height="23" width="39" y="138" x="200" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="disjoint-union" id="n3">
+          <geometry height="30" width="50" y="60" x="370"/>
+        </node>
+        <node color="#86f42e" type="concept" id="n4">
+          <geometry height="50" width="277" y="-70" x="-208"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#Port</iri>
+          <label height="28" width="277" y="-70" x="-208" customSize="1" size="16"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n5">
+          <geometry height="50" width="70" y="-70" x="110"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port</iri>
+          <label height="23" width="29" y="-100" x="110" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="concept" id="n50">
+          <geometry height="50" width="110" y="90" x="-440"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#ListedPort</iri>
+          <label height="23" width="110" y="90" x="-440" customSize="0" size="12"/>
+        </node>
+        <node color="#86f42e" type="concept" id="n52">
+          <geometry height="50" width="115" y="240" x="302"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#BoundaryElement</iri>
+          <label height="23" width="115" y="240" x="302" customSize="0" size="12"/>
+        </node>
+        <node color="#c2b078" type="concept" id="n57">
+          <geometry height="50" width="110" y="-70" x="-550"/>
+          <iri>https://cdm.ovh/rsm/list2/list2#OWLList</iri>
+          <label height="23" width="110" y="-70" x="-550" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n6">
+          <geometry height="20" width="20" y="-70" x="230"/>
+          <label height="23" width="39" y="-92" x="230" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="range-restriction" id="n7">
+          <geometry height="20" width="20" y="-70" x="0"/>
+          <label height="23" width="39" y="-92" x="0" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#86f42e" type="role" id="n72">
+          <geometry height="50" width="70" y="350" x="-210"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#nonNavigableTo</iri>
+          <label height="23" width="94" y="320" x="-210" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n73">
+          <geometry height="20" width="20" y="350" x="-360"/>
+          <label height="23" width="39" y="328" x="-360" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="range-restriction" id="n74">
+          <geometry height="20" width="20" y="350" x="-70"/>
+          <label height="23" width="39" y="328" x="-70" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="range-restriction" id="n76">
+          <geometry height="20" width="20" y="-100" x="490"/>
+          <label height="23" width="39" y="-122" x="490" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n77">
+          <geometry height="20" width="20" y="-40" x="490"/>
+          <label height="23" width="39" y="-62" x="490" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#fcfcfc" type="role" id="n78">
+          <geometry height="50" width="70" y="-70" x="570"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#leadsTo</iri>
+          <label height="23" width="50" y="-100" x="570" customSize="0" size="12"/>
+        </node>
+        <node color="#c2b078" type="concept" id="n82">
+          <geometry height="50" width="110" y="-300" x="110"/>
+          <iri>https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature</iri>
+          <label height="23" width="110" y="-300" x="110" customSize="0" size="12"/>
+        </node>
+        <node color="#86f42e" type="role" id="n83">
+          <geometry height="50" width="70" y="130" x="-210"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#navigableTo</iri>
+          <label height="23" width="72" y="100" x="-210" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n85">
+          <geometry height="50" width="70" y="50" x="-210"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#navigableToTransitive</iri>
+          <label height="23" width="124" y="20" x="-210" customSize="0" size="12"/>
+        </node>
+        <node color="#000000" type="range-restriction" id="n86">
+          <geometry height="20" width="20" y="50" x="-140"/>
+          <label height="23" width="39" y="28" x="-140" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#fcfcfc" type="domain-restriction" id="n87">
+          <geometry height="20" width="20" y="50" x="-280"/>
+          <label height="23" width="39" y="28" x="-280" customSize="0" size="12">exists</label>
+        </node>
+        <node color="#000000" type="disjoint-union" id="n88">
+          <geometry height="30" width="50" y="-160" x="110"/>
+        </node>
+        <edge source="n3" target="n0" type="inclusion" id="e0">
+          <point y="60" x="370"/>
+          <point y="-70" x="370"/>
+        </edge>
+        <edge source="n1" target="n3" type="input" id="e1">
+          <point y="135" x="322"/>
+          <point y="60" x="370"/>
+        </edge>
+        <edge source="n50" target="n4" type="inclusion" id="e134">
+          <point y="65" x="-420"/>
+          <point y="0" x="-420"/>
+          <point y="-46" x="-340"/>
+        </edge>
+        <edge source="n52" target="n1" type="inclusion" id="e137">
+          <point y="240" x="302"/>
+          <point y="160" x="300"/>
+        </edge>
+        <edge source="n13" target="n12" type="inclusion" id="e14">
+          <point y="280" x="-210"/>
+          <point y="200" x="-210"/>
+        </edge>
+        <edge source="n50" target="n57" type="inclusion" id="e142">
+          <point y="65" x="-450"/>
+          <point y="0" x="-450"/>
+          <point y="-70" x="-550"/>
+        </edge>
+        <edge source="n12" target="n14" type="input" id="e15">
+          <point y="200" x="-210"/>
+          <point y="200" x="-310"/>
+        </edge>
+        <edge source="n12" target="n15" type="input" id="e16">
+          <point y="200" x="-210"/>
+          <point y="200" x="-130"/>
+          <point y="200" x="-110"/>
+        </edge>
+        <edge source="n73" target="n4" type="inclusion" id="e162">
+          <point y="350" x="-360"/>
+          <point y="-20" x="-360"/>
+          <point y="-70" x="-208"/>
+        </edge>
+        <edge source="n74" target="n4" type="inclusion" id="e163">
+          <point y="350" x="-70"/>
+          <point y="-30" x="-70"/>
+          <point y="-70" x="-208"/>
+        </edge>
+        <edge source="n72" target="n73" type="input" id="e164">
+          <point y="350" x="-210"/>
+          <point y="350" x="-360"/>
+        </edge>
+        <edge source="n72" target="n74" type="input" id="e165">
+          <point y="350" x="-210"/>
+          <point y="350" x="-70"/>
+        </edge>
+        <edge source="n76" target="n0" type="inclusion" id="e168">
+          <point y="-100" x="490"/>
+          <point y="-70" x="370"/>
+        </edge>
+        <edge source="n77" target="n0" type="inclusion" id="e169">
+          <point y="-40" x="490"/>
+          <point y="-70" x="370"/>
+        </edge>
+        <edge source="n14" target="n4" type="inclusion" id="e17">
+          <point y="200" x="-310"/>
+          <point y="-30" x="-310"/>
+          <point y="-70" x="-208"/>
+        </edge>
+        <edge source="n83" target="n85" type="inclusion" id="e177">
+          <point y="130" x="-210"/>
+          <point y="50" x="-210"/>
+        </edge>
+        <edge source="n85" target="n87" type="input" id="e178">
+          <point y="50" x="-210"/>
+          <point y="50" x="-280"/>
+        </edge>
+        <edge source="n85" target="n86" type="input" id="e179">
+          <point y="50" x="-210"/>
+          <point y="50" x="-140"/>
+        </edge>
+        <edge source="n15" target="n4" type="inclusion" id="e18">
+          <point y="200" x="-110"/>
+          <point y="-30" x="-110"/>
+          <point y="-70" x="-208"/>
+        </edge>
+        <edge source="n86" target="n4" type="inclusion" id="e180">
+          <point y="50" x="-140"/>
+          <point y="-20" x="-140"/>
+          <point y="-70" x="-208"/>
+        </edge>
+        <edge source="n87" target="n4" type="inclusion" id="e181">
+          <point y="50" x="-280"/>
+          <point y="-20" x="-280"/>
+          <point y="-70" x="-208"/>
+        </edge>
+        <edge source="n78" target="n76" type="input" id="e182">
+          <point y="-70" x="570"/>
+          <point y="-100" x="490"/>
+        </edge>
+        <edge source="n78" target="n77" type="input" id="e183">
+          <point y="-70" x="570"/>
+          <point y="-40" x="490"/>
+        </edge>
+        <edge source="n4" target="n88" type="input" id="e185">
+          <point y="-70" x="-208"/>
+          <point y="-160" x="110"/>
+        </edge>
+        <edge source="n0" target="n88" type="input" id="e186">
+          <point y="-70" x="370"/>
+          <point y="-160" x="110"/>
+        </edge>
+        <edge source="n88" target="n82" type="inclusion" id="e189">
+          <point y="-160" x="110"/>
+          <point y="-300" x="110"/>
+        </edge>
+        <edge source="n2" target="n3" type="input" id="e2">
+          <point y="135" x="427"/>
+          <point y="60" x="370"/>
+        </edge>
+        <edge source="n5" target="n6" type="input" id="e3">
+          <point y="-70" x="110"/>
+          <point y="-70" x="230"/>
+        </edge>
+        <edge source="n5" target="n7" type="input" id="e4">
+          <point y="-70" x="110"/>
+          <point y="-70" x="0"/>
+        </edge>
+        <edge source="n26" target="n1" type="inclusion" id="e57">
+          <point y="160" x="200"/>
+          <point y="160" x="245"/>
+        </edge>
+        <edge source="n22" target="n26" type="input" id="e58">
+          <point y="50" x="200"/>
+          <point y="160" x="200"/>
+        </edge>
+        <edge source="n21" target="n5" type="inclusion" id="e67">
+          <point y="50" x="20"/>
+          <point y="-70" x="110"/>
+        </edge>
+        <edge source="n22" target="n5" type="inclusion" id="e68">
+          <point y="50" x="200"/>
+          <point y="-70" x="110"/>
+        </edge>
+        <edge source="n6" target="n0" type="inclusion" id="e83">
+          <point y="-70" x="230"/>
+          <point y="-70" x="370"/>
+        </edge>
+        <edge source="n7" target="n4" type="inclusion" id="e85">
+          <point y="-70" x="0"/>
+          <point y="-70" x="-208"/>
+        </edge>
+      </diagram>
+      <diagram width="5000" height="5000" name="topology inverse relations">
+        <node color="#fcfcfc" type="role" id="n0">
+          <geometry height="50" width="70" y="-140" x="-110"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port</iri>
+          <label height="23" width="29" y="-170" x="-110" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n1">
+          <geometry height="50" width="70" y="-140" x="100"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#onElement</iri>
+          <label height="23" width="64" y="-170" x="100" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n13">
+          <geometry height="50" width="70" y="60" x="300"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#nonNavigableTo</iri>
+          <label height="23" width="94" y="30" x="300" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n14">
+          <geometry height="30" width="50" y="-40" x="410"/>
+          <label height="23" width="23" y="-40" x="410" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n15">
+          <geometry height="30" width="50" y="60" x="410"/>
+          <label height="23" width="23" y="60" x="410" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n16">
+          <geometry height="50" width="70" y="-40" x="510"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#navigableFrom</iri>
+          <label height="23" width="86" y="-70" x="510" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n17">
+          <geometry height="50" width="70" y="60" x="510"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#nonNavigableFrom</iri>
+          <label height="23" width="108" y="30" x="510" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n18">
+          <geometry height="50" width="70" y="-140" x="510"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#navigableFromTransitive</iri>
+          <label height="23" width="138" y="-170" x="510" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n2">
+          <geometry height="30" width="50" y="-140" x="0"/>
+          <label height="23" width="23" y="-140" x="0" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n22">
+          <geometry height="30" width="50" y="-140" x="410"/>
+          <label height="23" width="23" y="-140" x="410" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n23">
+          <geometry height="50" width="70" y="-40" x="300"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#navigableTo</iri>
+          <label height="23" width="72" y="-70" x="300" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n24">
+          <geometry height="50" width="70" y="-140" x="300"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#navigableToTransitive</iri>
+          <label height="23" width="124" y="-170" x="300" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n25">
+          <geometry height="50" width="70" y="-40" x="-110"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port0</iri>
+          <label height="23" width="36" y="-70" x="-110" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n26">
+          <geometry height="30" width="50" y="-40" x="0"/>
+          <label height="23" width="23" y="-40" x="0" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n27">
+          <geometry height="50" width="70" y="-40" x="100"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port0onElement</iri>
+          <label height="23" width="93" y="-70" x="100" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n28">
+          <geometry height="50" width="70" y="60" x="-110"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port1</iri>
+          <label height="23" width="36" y="30" x="-110" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n29">
+          <geometry height="30" width="50" y="60" x="0"/>
+          <label height="23" width="23" y="60" x="0" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n30">
+          <geometry height="50" width="70" y="60" x="100"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#port1onElement</iri>
+          <label height="23" width="93" y="30" x="100" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n31">
+          <geometry height="50" width="70" y="260" x="100"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#fromPort</iri>
+          <label height="23" width="56" y="230" x="100" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n32">
+          <geometry height="50" width="70" y="370" x="100"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#toPort</iri>
+          <label height="23" width="41" y="340" x="100" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n34">
+          <geometry height="50" width="70" y="260" x="-90"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#originOfNavigability</iri>
+          <label height="23" width="112" y="230" x="-90" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role" id="n35">
+          <geometry height="50" width="70" y="370" x="-90"/>
+          <iri>https://cdm.ovh/rsm/topology/topo#destinationOfNavigability</iri>
+          <label height="23" width="141" y="340" x="-90" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n36">
+          <geometry height="30" width="50" y="260" x="10"/>
+          <label height="23" width="23" y="260" x="10" customSize="0" size="12"/>
+        </node>
+        <node color="#fcfcfc" type="role-inverse" id="n37">
+          <geometry height="30" width="50" y="370" x="10"/>
+          <label height="23" width="23" y="370" x="10" customSize="0" size="12"/>
+        </node>
+        <edge source="n1" target="n2" type="input" id="e1">
+          <point y="-140" x="100"/>
+          <point y="-140" x="0"/>
+        </edge>
+        <edge source="n16" target="n14" type="input" id="e10">
+          <point y="-40" x="510"/>
+          <point y="-40" x="410"/>
+        </edge>
+        <edge source="n17" target="n15" type="input" id="e11">
+          <point y="60" x="510"/>
+          <point y="60" x="410"/>
+        </edge>
+        <edge source="n18" target="n22" type="input" id="e13">
+          <point y="-140" x="510"/>
+          <point y="-140" x="410"/>
+        </edge>
+        <edge source="n23" target="n14" type="equivalence" id="e15">
+          <point y="-40" x="300"/>
+          <point y="-40" x="410"/>
+        </edge>
+        <edge source="n24" target="n22" type="equivalence" id="e16">
+          <point y="-140" x="300"/>
+          <point y="-140" x="410"/>
+        </edge>
+        <edge source="n16" target="n18" type="inclusion" id="e17">
+          <point y="-40" x="510"/>
+          <point y="-140" x="510"/>
+        </edge>
+        <edge source="n27" target="n26" type="input" id="e20">
+          <point y="-40" x="100"/>
+          <point y="-40" x="0"/>
+        </edge>
+        <edge source="n30" target="n29" type="input" id="e21">
+          <point y="60" x="100"/>
+          <point y="60" x="0"/>
+        </edge>
+        <edge source="n25" target="n26" type="inclusion" id="e22">
+          <point y="-40" x="-110"/>
+          <point y="-40" x="0"/>
+        </edge>
+        <edge source="n28" target="n29" type="inclusion" id="e23">
+          <point y="60" x="-110"/>
+          <point y="60" x="0"/>
+        </edge>
+        <edge source="n0" target="n2" type="inclusion" id="e24">
+          <point y="-140" x="-110"/>
+          <point y="-140" x="0"/>
+        </edge>
+        <edge source="n34" target="n36" type="inclusion" id="e25">
+          <point y="260" x="-90"/>
+          <point y="260" x="10"/>
+        </edge>
+        <edge source="n35" target="n37" type="inclusion" id="e26">
+          <point y="370" x="-90"/>
+          <point y="370" x="10"/>
+        </edge>
+        <edge source="n31" target="n36" type="input" id="e27">
+          <point y="260" x="100"/>
+          <point y="260" x="10"/>
+        </edge>
+        <edge source="n32" target="n37" type="input" id="e28">
+          <point y="370" x="100"/>
+          <point y="370" x="10"/>
+        </edge>
+        <edge source="n13" target="n15" type="equivalence" id="e9">
+          <point y="60" x="300"/>
+          <point y="60" x="410"/>
+        </edge>
+      </diagram>
+    </diagrams>
+  </project>
+</graphol>
