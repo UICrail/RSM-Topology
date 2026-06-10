@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="280" viewBox="0 0 800 280" font-family="Helvetica, Arial, sans-serif" font-size="14">
+
+  <!-- connections between ports (switches / coincident ports), thin grey -->
+  <g stroke="#b0b0b0" stroke-width="2" fill="none">
+    <line x1="190" y1="150" x2="230" y2="150"/> <!-- a1 to c0 -->
+    <line x1="190" y1="150" x2="230" y2="100"/> <!-- a1 to b0 -->
+    <line x1="430" y1="100" x2="470" y2="150"/> <!-- b1 to d0 -->
+    <line x1="430" y1="150" x2="470" y2="150"/> <!-- c1 to d0 -->
+    <line x1="630" y1="150" x2="652" y2="150"/> <!-- d1 to e0/e1 -->
+  </g>
+
+  <!-- linear elements, thick -->
+  <g stroke="#2c3e50" stroke-width="5" fill="none" stroke-linecap="round">
+    <line x1="30"  y1="150" x2="190" y2="150"/>  <!-- a -->
+    <line x1="230" y1="100" x2="430" y2="100"/>  <!-- b (siding) -->
+    <line x1="230" y1="150" x2="430" y2="150"/>  <!-- c (through track) -->
+    <line x1="470" y1="150" x2="630" y2="150"/>  <!-- d -->
+    <circle cx="702" cy="150" r="50"/>           <!-- e (loop) -->
+  </g>
+
+  <!-- element labels -->
+  <g fill="#2c3e50" text-anchor="middle">
+    <text x="110" y="130">a (length 100)</text>
+    <text x="330" y="85">b  siding (length 220)</text>
+    <text x="330" y="195">c  through track (length 200)</text>
+    <text x="550" y="130">d (length 150)</text>
+    <text x="702" y="145">e  loop</text>
+    <text x="702" y="165">(length 450)</text>
+  </g>
+
+  <!-- ports -->
+  <g stroke="#2c3e50" stroke-width="2" fill="#ffffff">
+    <circle cx="30"  cy="150" r="5"/>  <!-- a0 -->
+    <circle cx="190" cy="150" r="5"/>  <!-- a1 -->
+    <circle cx="230" cy="100" r="5"/>  <!-- b0 -->
+    <circle cx="430" cy="100" r="5"/>  <!-- b1 -->
+    <circle cx="230" cy="150" r="5"/>  <!-- c0 -->
+    <circle cx="430" cy="150" r="5"/>  <!-- c1 -->
+    <circle cx="470" cy="150" r="5"/>  <!-- d0 -->
+    <circle cx="630" cy="150" r="5"/>  <!-- d1 -->
+    <circle cx="652" cy="150" r="5"/>  <!-- e0 / e1 (coincident) -->
+  </g>
+
+  <!-- port labels -->
+  <g fill="#666666" font-size="13" font-style="italic">
+    <text x="24"  y="172">a0</text>
+    <text x="184" y="172">a1</text>
+    <text x="224" y="122">b0</text>
+    <text x="424" y="122">b1</text>
+    <text x="224" y="172">c0</text>
+    <text x="424" y="172">c1</text>
+    <text x="464" y="172">d0</text>
+    <text x="610" y="172">d1</text>
+    <text x="640" y="135">e0</text>
+    <text x="640" y="180">e1</text>
+  </g>
+
+</svg>
