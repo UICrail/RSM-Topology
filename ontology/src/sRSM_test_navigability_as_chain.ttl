@@ -1,0 +1,345 @@
+@prefix : <https://cdm.ovh/rsm/topology/topo#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix list: <https://cdm.ovh/rsm/list2/list2#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rgeo: <https://cdm.ovh/rsm/geosparql_adapter/rgeo#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix topo: <https://cdm.ovh/rsm/topology/topo#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://cdm.ovh/rsm/topology/topo> .
+
+<https://cdm.ovh/rsm/topology/topo> rdf:type owl:Ontology ;
+                                     owl:versionIRI <https://cdm.ovh/rsm/topology/1.0rc9/topo> ;
+                                     owl:imports <https://cdm.ovh/rsm/geosparql_adapter/rgeo> ;
+                                     dc:abstract "RSM topology provides fundamental railway network description, focused on connections and navigabilities between net elements. Net elements can be linear (embodied by lines or tracks) or non linear (embodied by stations, yards, or wider network areas). Geometry aspects are delegated to GeoSPARQL and are not essential to topology. Functional aspects (such as \"current switch setting\") also are not part of the topology."@en ;
+                                     dc:contributor "Pierre Tane, UIC"@en ;
+                                     dc:creator "Airy Magnien, UIC"@en ;
+                                     dc:date "28 May 2026"@en ;
+                                     dc:description """Full RSM topology. Connexities and Navigabilities as object properties . Additionally, navigability reification is included. Temporal aspects to be covered by annotations and/or named graphs and/or dul:Situations, or similar.
+
+Syntactic sugar: some properties that are most likely to be used are chained properties, equivalent to derived associations in UML."""@en ;
+                                     dc:title "RSM topology"@en ;
+                                     dc:type "RDF/OWL ontology (using OWL2 RL profile)"@en ;
+                                     dcterms:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+                                     owl:versionInfo "1.0rc8 : Existential restriction added on fromPort and toPort properties."@en ,
+                                                     """1.0rc9:
+navigableFromTransitive characteristic \"transitive\" was missing.
+LeadsTo renamed LeadsToNext and LeadsToTransitive to LeadsTo (which, by the way, is not transitive).
+property chain removed (likely cause of reasoner crashes)"""@en ,
+                                                     "Reification limited to navigableTo property. Added property oppositePort as a property chain, and related properties."@en ,
+                                                     "error correction: navigableFromTransitive was not marked transitive"@en ;
+                                     <https://vocab.org/vann/preferredNamespacePrefix> "topo" ;
+                                     <https://vocab.org/vann/preferredNamespaceURI> "http://cdm.ovh/rsm/topology/topo#"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/abstract
+dc:abstract rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+dc:date rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/type
+dc:type rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+dcterms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  https://vocab.org/vann/preferredNamespacePrefix
+<https://vocab.org/vann/preferredNamespacePrefix> rdf:type owl:AnnotationProperty .
+
+
+###  https://vocab.org/vann/preferredNamespaceURI
+<https://vocab.org/vann/preferredNamespaceURI> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://cdm.ovh/rsm/topology/topo#connectedWith
+topo:connectedWith rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf topo:connectedWithTransitive ;
+                   rdf:type owl:SymmetricProperty ;
+                   rdfs:label "connected with"@en ;
+                   skos:definition "Relation between a port on a net element and the adjacent port on another net element. This is a symmetric relation. Geographic locations of related ports may not coincide, either because of constructive tolerances (abutted tracks...), or uncertainties, or rounding errors, or by construction (e.g. case of tracks joined via a turntable)."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#connectedWithTransitive
+topo:connectedWithTransitive rdf:type owl:ObjectProperty ,
+                                      owl:TransitiveProperty ;
+                             rdfs:domain topo:Port ;
+                             rdfs:range topo:Port ;
+                             rdfs:label "connected with transitive"@en ;
+                             skos:definition "transitive closure of connectedWith."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#destinationOfNavigability
+topo:destinationOfNavigability rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf [ owl:inverseOf topo:toPort
+                                                  ] ;
+                               rdfs:comment "destination of navigability"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#fromPort
+topo:fromPort rdf:type owl:ObjectProperty ;
+              rdfs:domain topo:Navigability ;
+              rdfs:range topo:Port ;
+              rdfs:comment "Port from which the navigability relation starts: conventionally, the \"exit port\" from which a running train leaves a net element."@en ,
+                           "a functional property, but not declared as such, owing to adverse consequences on the property chain it participates in."@en ;
+              rdfs:label "from port"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#leadsTo
+topo:leadsTo rdf:type owl:ObjectProperty ;
+             rdfs:domain topo:NetElement ;
+             rdfs:range topo:NetElement ;
+             owl:propertyChainAxiom ( topo:port
+                                      topo:navigableToTransitive
+                                      topo:onElement
+                                    ) ;
+             rdfs:comment "technical note: this may look like, but is *not* the transitive closure of leadsToNext. The transitive closure of leadsTo would yield train movements with reversal of travel direction, which is not desirable."@en ;
+             rdfs:label "leads to transitive"@en ;
+             skos:definition "relation between net elements (adjacent or not), where rolling stock may leave the first (subject) and reach the second (object) without reversing travel direction."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#leadsToNext
+topo:leadsToNext rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf topo:leadsTo ;
+                 owl:propertyChainAxiom ( topo:port
+                                          topo:navigableTo
+                                          topo:onElement
+                                        ) ;
+                 rdfs:label "leads to"@en ;
+                 skos:definition "relation between two adjacent net elements (i.e. having connected ports), where rolling stock can start moving from the first and arrive on the next without reversing travel direction. This property is not symmetric (think of sprung switches). A shortcut property for reasoning directly on net elements."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#navigableFrom
+topo:navigableFrom rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf topo:navigableFromTransitive ;
+                   owl:inverseOf topo:navigableTo ;
+                   rdfs:label "navigable from"@en ;
+                   skos:definition "inverse of navigable to"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#navigableFromTransitive
+topo:navigableFromTransitive rdf:type owl:ObjectProperty ;
+                             owl:inverseOf topo:navigableToTransitive ;
+                             rdf:type owl:TransitiveProperty ;
+                             rdfs:label "navigable from transitive"@en ;
+                             skos:definition "inverse of navigable to transitive"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#navigableTo
+topo:navigableTo rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf topo:navigableToTransitive ;
+                 owl:propertyChainAxiom ( topo:originOfNavigability
+                                          topo:toPort
+                                        ) ;
+                 rdfs:comment "Expresses the possibility, for a train movement, to leave a net element via an exit port and to navigate to another net element until another exit port. Navigation excludes reversal of travel direction, even if the reversal is allowed by operational rules (e.g. shunting mode, ...)."@en ;
+                 rdfs:label "navigable to"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#navigableToTransitive
+topo:navigableToTransitive rdf:type owl:ObjectProperty ,
+                                    owl:TransitiveProperty ;
+                           rdfs:domain topo:Port ;
+                           rdfs:range topo:Port ;
+                           rdfs:label "navigable to transitive"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#nonNavigableFrom
+topo:nonNavigableFrom rdf:type owl:ObjectProperty ;
+                      owl:inverseOf topo:nonNavigableTo ;
+                      rdfs:label "non navigable from"@en ;
+                      skos:definition "inverse of non navigable to"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#nonNavigableTo
+topo:nonNavigableTo rdf:type owl:ObjectProperty ;
+                    rdfs:domain topo:Port ;
+                    rdfs:range topo:Port ;
+                    rdfs:label "non navigable to"@en ;
+                    skos:definition "Expresses that there is no navigability link between the related ports. Given the OWA (open world assumption), a navigability not expressed does not mean \"non navigability\". Consequently, non-navigability should be explicitly stated, as it is fundamental knowledge about the network layout."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#onElement
+topo:onElement rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:label "on element"@en ;
+               skos:definition "inverse of port, port0, port1"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#oppositePort
+topo:oppositePort rdf:type owl:ObjectProperty ,
+                           owl:SymmetricProperty ;
+                  owl:propertyChainAxiom ( topo:port0onElement
+                                           topo:port1
+                                         ) ;
+                  rdfs:comment "Opposite port on a linear element; a symmetric property. Not meaningful if element is non-linear."@en ;
+                  rdfs:label "opposite port"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#originOfNavigability
+topo:originOfNavigability rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf [ owl:inverseOf topo:fromPort
+                                             ] ;
+                          rdfs:label "origin of navigability"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#port
+topo:port rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf [ owl:inverseOf topo:onElement
+                             ] ;
+          rdf:type owl:InverseFunctionalProperty ;
+          rdfs:domain topo:NetElement ;
+          rdfs:range topo:Port ;
+          rdfs:label "port"@en ;
+          skos:definition "Associated ports with net elements. This is an inverse functional property, meaning that a port can belong to at most one net element (if a port is found to belong to two net elements, the inference is that those two elements are the same)."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#port0
+topo:port0 rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf topo:port ,
+                              [ owl:inverseOf topo:port0onElement
+                              ] ;
+           rdf:type owl:FunctionalProperty ,
+                    owl:InverseFunctionalProperty ;
+           rdfs:label "port 0"@en ;
+           skos:definition "First port of some net element that has, by definition, two ports. Allows to orient linear elements in space, even though linear elements may be completely symmetrical from a functional point of view. Orientation is conventional. Can also be used on non-linear elements, with undefined semantics."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#port0onElement
+topo:port0onElement rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ,
+                             owl:InverseFunctionalProperty ;
+                    rdfs:label "port0on element"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#port1
+topo:port1 rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf topo:port ,
+                              [ owl:inverseOf topo:port1onElement
+                              ] ;
+           rdf:type owl:FunctionalProperty ,
+                    owl:InverseFunctionalProperty ;
+           rdfs:domain topo:LinearElement ;
+           rdfs:label "port 1" ;
+           skos:definition "the other port on a linear element."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#port1onElement
+topo:port1onElement rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ,
+                             owl:InverseFunctionalProperty ;
+                    rdfs:label "port1on element"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#toPort
+topo:toPort rdf:type owl:ObjectProperty ;
+            rdfs:domain topo:Navigability ;
+            rdfs:range topo:Port ;
+            rdfs:comment "Designates the exit port a running train can reach on a net element. Note: the entry port on that element is provided by a connectedTo property."@en ,
+                         "see also comments on fromPort"@en ;
+            rdfs:label "to port"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature
+rgeo:Feature rdf:type owl:Class .
+
+
+###  https://cdm.ovh/rsm/list2/list2#OWLList
+list:OWLList rdf:type owl:Class .
+
+
+###  https://cdm.ovh/rsm/topology/topo#BoundaryElement
+topo:BoundaryElement rdf:type owl:Class ;
+                     rdfs:subClassOf topo:LinearElement ;
+                     rdfs:label "Boundary element"@en ;
+                     skos:definition "Linear element with length = 0. It still has two distinct port, allowing to express connectivity and navigability (without losing directional information or the possibility to restrict navigation to a single direction). To be used at the borders of networks managed by different entities."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#LinearElement
+topo:LinearElement rdf:type owl:Class ;
+                   rdfs:subClassOf topo:NetElement ;
+                   owl:disjointWith topo:NonlinearElement ;
+                   rdfs:comment "Any topology element that has exactly two extremities or \" ports\"."@en ;
+                   rdfs:label "Linear element"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#ListedPort
+topo:ListedPort rdf:type owl:Class ;
+                rdfs:subClassOf list:OWLList ,
+                                topo:Port ;
+                rdfs:label "Listed port"@en ;
+                skos:definition "A port in an ordered list (with successors; no contents needed). Can be used to sort the ports of a non-linear net element (e.g. clockwise from northmost). See also OWLList ontology."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#Navigability
+topo:Navigability rdf:type owl:Class ;
+                  rdfs:comment """Note: non-navigability and connexity reification are not proposed here, assuming that:
+1. the authority lies with the properties (navigableTo, nonNavigableTo, connectedWith), and
+2. navigabilities as individuals are useful for further modelling (switches...), while non-navigabilities and connexities as individuals do not appear to be equally useful."""@en ,
+                               "Reified navigability relation. It is oriented (from port - to port); see navigableTo property for details."@en ;
+                  rdfs:label "Navigability"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#NetElement
+topo:NetElement rdf:type owl:Class ;
+                rdfs:subClassOf rgeo:Feature ;
+                owl:disjointWith topo:Port ;
+                rdfs:label "Net element"@en ;
+                skos:definition "Superclass for net elements (network elements)"@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#NonlinearElement
+topo:NonlinearElement rdf:type owl:Class ;
+                      rdfs:subClassOf topo:NetElement ;
+                      rdfs:label "Nonlinear element"@en ;
+                      skos:definition "Net element with any number of ports except two. Used for expressing connexities and navigabilities from or to a complex network area (e.g. a yard or a station)."@en .
+
+
+###  https://cdm.ovh/rsm/topology/topo#Port
+topo:Port rdf:type owl:Class ;
+          rdfs:subClassOf rgeo:Feature ;
+          rdfs:label "Port" ;
+          skos:definition "Any place, at the boundary of a net element, that can be an entry and/or exit point for rolling stock. In the case of linear elements, there are exactly two ports. In the case of a loop, the two ports of the loop ports coincide geographically (but for some tolerances) but remain distinct individuals, allowing to orient the loop if need be."@en .
+
+
+###  Generated by the OWL API (version 4.5.29) https://github.com/owlcs/owlapi
