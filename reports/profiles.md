@@ -1,7 +1,7 @@
 # OWL Profile Validation Report
 
-**Ontology**: ontology/src/sRSM_test_navigability_as_chain.ttl
-**Date**: 2026-06-10 09:19:28 UTC
+**Ontology**: ontology/src/topo.ttl
+**Date**: 2026-06-10 11:34:46 UTC
 
 ---
 

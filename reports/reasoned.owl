@@ -16,18 +16,19 @@
      xmlns:vann="https://vocab.org/vann/"
      xmlns:dcterms="http://purl.org/dc/terms/">
     <owl:Ontology rdf:about="https://cdm.ovh/rsm/topology/topo">
-        <owl:versionIRI rdf:resource="https://cdm.ovh/rsm/topology/1.0rc9/topo"/>
+        <owl:versionIRI rdf:resource="https://cdm.ovh/rsm/topology/1.0rc10/topo"/>
         <owl:imports rdf:resource="https://cdm.ovh/rsm/geosparql_adapter/rgeo"/>
         <dc:abstract xml:lang="en">RSM topology provides fundamental railway network description, focused on connections and navigabilities between net elements. Net elements can be linear (embodied by lines or tracks) or non linear (embodied by stations, yards, or wider network areas). Geometry aspects are delegated to GeoSPARQL and are not essential to topology. Functional aspects (such as &quot;current switch setting&quot;) also are not part of the topology.</dc:abstract>
         <dc:contributor xml:lang="en">Pierre Tane, UIC</dc:contributor>
         <dc:creator xml:lang="en">Airy Magnien, UIC</dc:creator>
-        <dc:date xml:lang="en">28 May 2026</dc:date>
+        <dc:date xml:lang="en">10 June 2026</dc:date>
         <dc:description xml:lang="en">Full RSM topology. Connexities and Navigabilities as object properties . Additionally, navigability reification is included. Temporal aspects to be covered by annotations and/or named graphs and/or dul:Situations, or similar.
 
 Syntactic sugar: some properties that are most likely to be used are chained properties, equivalent to derived associations in UML.</dc:description>
         <dc:title xml:lang="en">RSM topology</dc:title>
         <dc:type xml:lang="en">RDF/OWL ontology (using OWL2 RL profile)</dc:type>
         <dcterms:license rdf:resource="https://creativecommons.org/licenses/by-sa/4.0/"/>
+        <owl:versionInfo xml:lang="en">1.0rc10: Restored functional property characteristics for fromPort and toPort. Removed property chain linking navigableTo with reified navigability (DL profile violation). Removed useless leadsToNext property.</owl:versionInfo>
         <owl:versionInfo xml:lang="en">1.0rc8 : Existential restriction added on fromPort and toPort properties.</owl:versionInfo>
         <owl:versionInfo xml:lang="en">1.0rc9:
 navigableFromTransitive characteristic &quot;transitive&quot; was missing.
@@ -135,7 +136,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
         <rdfs:subPropertyOf rdf:resource="https://cdm.ovh/rsm/topology/topo#connectedWithTransitive"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:label xml:lang="en">connected with</rdfs:label>
-        <skos:definition xml:lang="en">Relation between a port on a net element and the adjacent port on another net element. This is a symmetric relation. Geographic locations of related ports may not coincide, either because of constructive tolerances (abutted tracks...), or uncertainties, or rounding errors, or by construction (e.g. case of tracks joined via a turntable).</skos:definition>
+        <skos:definition xml:lang="en">Relation between a port on a net element and an adjacent port on another net element. This is a symmetric relation. Geographic locations of related ports may not coincide exactly, either because of constructive tolerances (abutted tracks...), or uncertainties, or rounding errors, or by construction (e.g. case of tracks joined via a turntable).</skos:definition>
     </owl:ObjectProperty>
     
 
@@ -160,7 +161,8 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
                 <owl:inverseOf rdf:resource="https://cdm.ovh/rsm/topology/topo#toPort"/>
             </rdf:Description>
         </rdfs:subPropertyOf>
-        <rdfs:comment xml:lang="en">destination of navigability</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:label xml:lang="en">destination of navigability</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -168,10 +170,10 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
     <!-- https://cdm.ovh/rsm/topology/topo#fromPort -->
 
     <owl:ObjectProperty rdf:about="https://cdm.ovh/rsm/topology/topo#fromPort">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="https://cdm.ovh/rsm/topology/topo#Navigability"/>
         <rdfs:range rdf:resource="https://cdm.ovh/rsm/topology/topo#Port"/>
         <rdfs:comment xml:lang="en">Port from which the navigability relation starts: conventionally, the &quot;exit port&quot; from which a running train leaves a net element.</rdfs:comment>
-        <rdfs:comment xml:lang="en">a functional property, but not declared as such, owing to adverse consequences on the property chain it participates in.</rdfs:comment>
         <rdfs:label xml:lang="en">from port</rdfs:label>
     </owl:ObjectProperty>
     
@@ -187,24 +189,8 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
             <rdf:Description rdf:about="https://cdm.ovh/rsm/topology/topo#navigableToTransitive"/>
             <rdf:Description rdf:about="https://cdm.ovh/rsm/topology/topo#onElement"/>
         </owl:propertyChainAxiom>
-        <rdfs:comment xml:lang="en">technical note: this may look like, but is *not* the transitive closure of leadsToNext. The transitive closure of leadsTo would yield train movements with reversal of travel direction, which is not desirable.</rdfs:comment>
-        <rdfs:label xml:lang="en">leads to transitive</rdfs:label>
-        <skos:definition xml:lang="en">relation between net elements (adjacent or not), where rolling stock may leave the first (subject) and reach the second (object) without reversing travel direction.</skos:definition>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://cdm.ovh/rsm/topology/topo#leadsToNext -->
-
-    <owl:ObjectProperty rdf:about="https://cdm.ovh/rsm/topology/topo#leadsToNext">
-        <rdfs:subPropertyOf rdf:resource="https://cdm.ovh/rsm/topology/topo#leadsTo"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="https://cdm.ovh/rsm/topology/topo#port"/>
-            <rdf:Description rdf:about="https://cdm.ovh/rsm/topology/topo#navigableTo"/>
-            <rdf:Description rdf:about="https://cdm.ovh/rsm/topology/topo#onElement"/>
-        </owl:propertyChainAxiom>
         <rdfs:label xml:lang="en">leads to</rdfs:label>
-        <skos:definition xml:lang="en">relation between two adjacent net elements (i.e. having connected ports), where rolling stock can start moving from the first and arrive on the next without reversing travel direction. This property is not symmetric (think of sprung switches). A shortcut property for reasoning directly on net elements.</skos:definition>
+        <skos:definition xml:lang="en">relation between net elements (adjacent or not), where rolling stock may leave an element (subject) and reach another element (object) without reversing travel direction. This property is derived from navigableToTransitive, but is itself not transitive.</skos:definition>
     </owl:ObjectProperty>
     
 
@@ -235,11 +221,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
 
     <owl:ObjectProperty rdf:about="https://cdm.ovh/rsm/topology/topo#navigableTo">
         <rdfs:subPropertyOf rdf:resource="https://cdm.ovh/rsm/topology/topo#navigableToTransitive"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="https://cdm.ovh/rsm/topology/topo#originOfNavigability"/>
-            <rdf:Description rdf:about="https://cdm.ovh/rsm/topology/topo#toPort"/>
-        </owl:propertyChainAxiom>
-        <rdfs:comment xml:lang="en">Expresses the possibility, for a train movement, to leave a net element via an exit port and to navigate to another net element until another exit port. Navigation excludes reversal of travel direction, even if the reversal is allowed by operational rules (e.g. shunting mode, ...).</rdfs:comment>
+        <rdfs:comment xml:lang="en">Expresses the possibility, for a train movement, to leave a net element via an exit port and to navigate to another net element until another exit port. Here, navigation excludes reversal of travel direction, even if the reversal is otherwise allowed by operational rules (e.g. shunting mode, ...).</rdfs:comment>
         <rdfs:label xml:lang="en">navigable to</rdfs:label>
     </owl:ObjectProperty>
     
@@ -251,6 +233,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdfs:domain rdf:resource="https://cdm.ovh/rsm/topology/topo#Port"/>
         <rdfs:range rdf:resource="https://cdm.ovh/rsm/topology/topo#Port"/>
+        <rdfs:comment xml:lang="en">transitive closure of navigableTo</rdfs:comment>
         <rdfs:label xml:lang="en">navigable to transitive</rdfs:label>
     </owl:ObjectProperty>
     
@@ -272,7 +255,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
         <rdfs:domain rdf:resource="https://cdm.ovh/rsm/topology/topo#Port"/>
         <rdfs:range rdf:resource="https://cdm.ovh/rsm/topology/topo#Port"/>
         <rdfs:label xml:lang="en">non navigable to</rdfs:label>
-        <skos:definition xml:lang="en">Expresses that there is no navigability link between the related ports. Given the OWA (open world assumption), a navigability not expressed does not mean &quot;non navigability&quot;. Consequently, non-navigability should be explicitly stated, as it is fundamental knowledge about the network layout.</skos:definition>
+        <skos:definition xml:lang="en">Expresses that there is no navigability link between the related ports. Given the OWA (open world assumption), a navigability not expressed does not mean &quot;non navigability&quot;. Consequently, non-navigability should be explicitly stated when it is known, as it is fundamental knowledge about the network layout.</skos:definition>
     </owl:ObjectProperty>
     
 
@@ -309,6 +292,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
                 <owl:inverseOf rdf:resource="https://cdm.ovh/rsm/topology/topo#fromPort"/>
             </rdf:Description>
         </rdfs:subPropertyOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:label xml:lang="en">origin of navigability</rdfs:label>
     </owl:ObjectProperty>
     
@@ -343,7 +327,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:label xml:lang="en">port 0</rdfs:label>
-        <skos:definition xml:lang="en">First port of some net element that has, by definition, two ports. Allows to orient linear elements in space, even though linear elements may be completely symmetrical from a functional point of view. Orientation is conventional. Can also be used on non-linear elements, with undefined semantics.</skos:definition>
+        <skos:definition xml:lang="en">First port of some net element. Allows to orient linear elements in space, even though linear elements may be completely symmetrical from a functional point of view. Linear element orientation can be arbitray, or become a matter of conventions. This property also be used on non-linear elements, with undefined semantics.</skos:definition>
     </owl:ObjectProperty>
     
 
@@ -371,7 +355,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="https://cdm.ovh/rsm/topology/topo#LinearElement"/>
         <rdfs:label>port 1</rdfs:label>
-        <skos:definition xml:lang="en">the other port on a linear element.</skos:definition>
+        <skos:definition xml:lang="en">points to the other port of a linear element. Only meaningful for linear elements.</skos:definition>
     </owl:ObjectProperty>
     
 
@@ -389,10 +373,10 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
     <!-- https://cdm.ovh/rsm/topology/topo#toPort -->
 
     <owl:ObjectProperty rdf:about="https://cdm.ovh/rsm/topology/topo#toPort">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="https://cdm.ovh/rsm/topology/topo#Navigability"/>
         <rdfs:range rdf:resource="https://cdm.ovh/rsm/topology/topo#Port"/>
         <rdfs:comment xml:lang="en">Designates the exit port a running train can reach on a net element. Note: the entry port on that element is provided by a connectedTo property.</rdfs:comment>
-        <rdfs:comment xml:lang="en">see also comments on fromPort</rdfs:comment>
         <rdfs:label xml:lang="en">to port</rdfs:label>
     </owl:ObjectProperty>
     
@@ -453,7 +437,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
     <owl:Class rdf:about="https://cdm.ovh/rsm/topology/topo#BoundaryElement">
         <rdfs:subClassOf rdf:resource="https://cdm.ovh/rsm/topology/topo#LinearElement"/>
         <rdfs:label xml:lang="en">Boundary element</rdfs:label>
-        <skos:definition xml:lang="en">Linear element with length = 0. It still has two distinct port, allowing to express connectivity and navigability (without losing directional information or the possibility to restrict navigation to a single direction). To be used at the borders of networks managed by different entities.</skos:definition>
+        <skos:definition xml:lang="en">Linear element with length = 0. It still has two distinct ports, allowing to express connectivity and navigability (without losing directional information or the possibility to restrict navigation to a single direction). To be used at the borders of networks managed by different entities.</skos:definition>
     </owl:Class>
     
 
@@ -476,7 +460,7 @@ property chain removed (likely cause of reasoner crashes)</owl:versionInfo>
         <rdfs:subClassOf rdf:resource="https://cdm.ovh/rsm/list2/list2#OWLList"/>
         <rdfs:subClassOf rdf:resource="https://cdm.ovh/rsm/topology/topo#Port"/>
         <rdfs:label xml:lang="en">Listed port</rdfs:label>
-        <skos:definition xml:lang="en">A port in an ordered list (with successors; no contents needed). Can be used to sort the ports of a non-linear net element (e.g. clockwise from northmost). See also OWLList ontology.</skos:definition>
+        <skos:definition xml:lang="en">A port in an ordered list (with successors; no contents needed). Can be used to sort the ports of a non-linear net element (e.g. clockwise from northmost). See also List ontology.</skos:definition>
     </owl:Class>
     
 

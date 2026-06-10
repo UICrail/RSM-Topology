@@ -1,5 +1,4 @@
 Level	Rule Name	Subject	Property	Value
-ERROR	missing_label	https://cdm.ovh/rsm/topology/topo#destinationOfNavigability	rdfs:label	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#BoundaryElement	IAO:0000115	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#LinearElement	IAO:0000115	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#ListedPort	IAO:0000115	
@@ -12,7 +11,6 @@ WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#connectedWithTransitiv
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#destinationOfNavigability	IAO:0000115	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#fromPort	IAO:0000115	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#leadsTo	IAO:0000115	
-WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#leadsToNext	IAO:0000115	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#navigableFrom	IAO:0000115	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#navigableFromTransitive	IAO:0000115	
 WARN	missing_definition	https://cdm.ovh/rsm/topology/topo#navigableTo	IAO:0000115	
