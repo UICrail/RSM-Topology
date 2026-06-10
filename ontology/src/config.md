@@ -1,5 +1,5 @@
 ---
-main_ontology: ontology/src/YOUR_ONTOLOGY_FILE.ttl
+main_ontology: ontology/src/topo.ttl
 reasoner: hermit
 ---
 
