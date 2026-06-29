@@ -8,7 +8,7 @@ A runnable version of the demo below is available online on SWISH (SWI-Prolog fo
 
 For readers unfamiliar with PROLOG, the few constructs used here:
 
-- `p(a)` is a fact (can be interpreted as unary property "thing a has property p"; similarly p(a, b) would represent a binary property, etc.);`p(X)` with capitalized `X` is a goal with a variable. Constants start with lower case, variables with upper case.
+- `p(a)` is a fact (it can be read as unary property "thing 'a' has property 'p'"; similarly p(a, b) would represent a binary property, etc.);`p(X)` with capitalized `X` is a goal with a variable. Constants start with lower case, variables with upper case.
 - `A :- B` reads "A holds if B holds" (a rule).
 - `,` is logical AND; `;` is logical OR.
 - `[H|T]` denotes a list with head `H` and tail `T`.
@@ -25,19 +25,19 @@ The topology ontology maps naturally onto PROLOG predicates:
 | ------------------------------------- | ----------------------------------------------------- | ---------------------- |
 | `topo:LinearElement` individual       | `linearelement/1` fact                                |                        |
 | `topo:port` (port *p* on element *x*) | `port(P, X)` fact                                     |                        |
-| `topo:connectedWith`                  | `connectedWith/2` facts + symmetry/transitivity rules |                        |
+| `topo:connectedWith` with symmetry and transitivity characteristics | `connectedWith/2` facts + symmetry and transitivity rules |                        |
 | `topo:navigableTo`                    | `navigableTo/2` facts                                 | directed edges         |
 | `topo:navigableToTransitive`          | `navigableToTransitive/2` rules                       | inferred, not asserted |
 | `rgeo:hasMetricLength`                | `elementlength/2` facts                               | see below              |
 
 
-Lengths: every `topo:LinearElement` is also a `rgeo:Feature`, and we assume each has a usable `rgeo:hasMetricLength` value. In PROLOG, each such value becomes a fact `elementlength(Element, Length)`. (In a production setting, these facts would be extracted from the triple store by a SPARQL `SELECT` and asserted into the PROLOG knowledge base.)
+Lengths: every `topo:LinearElement` is also a `rgeo:Feature`, and we assume each has a usable `rgeo:hasMetricLength` value. In PROLOG, each such value becomes a fact `elementlength(Element, Length) .`. In a production setting, these facts would be extracted from the triple store by a SPARQL `SELECT` query and asserted into the PROLOG knowledge base.
 
 ## Example network
 
-Four linear elements `a`, `b`, `c`, `d`: `a` on the left, `d` on the right, `b` and `c` in parallel in the middle (station tracks: `c` the "through" track, `b` the siding), joined by switches at both ends. A loop `e` is attached at the right end of `d`. Switches are not topology elements; their presence materializes as navigabilities.
+Four linear elements `a`, `b`, `c`, `d`: `a` on the left, `d` on the right, `b` and `c` in parallel in the middle (station tracks: `c` is the "through" track, `b` is the siding), joined by switches at both ends. A loop `e` is attached at the right end of `d`. Switches are not topology elements; their presence is manifested by navigabilities between ports.
 
-Each linear element `x` has two ports, conventionally named `x0` and `x1`.
+Each linear element `x` has two ports, _conventionally_ named `x0` and `x1`.
 
 ```prolog
 linearelement(a) .
@@ -101,7 +101,7 @@ elementlength(e, 450) .
 
 ## Path search and shortest path
 
-A path is a list of ports. Path enumeration is two rules — direct navigability gives a two-port path, otherwise take one navigable hop and recurse:
+A path is a list of ports. Path enumeration is two rules — navigability between direct neighbours yields a two-port path, otherwise take one navigable hop and recurse:
 
 ```prolog
 find_path(Start, End, [Start, End]) :-
@@ -155,7 +155,7 @@ find_shortest_path(Start, End, ShortestPath, MinLength) :-
 % (the through track c wins over the siding b)
 ```
 
-Note: `maplist`, `sum_list`, `min_member`, `nth0` are SWI-Prolog library predicates, not necessarily ISO PROLOG.
+Note: `maplist`, `sum_list`, `min_member`, `nth0` are SWI-Prolog library predicates, not ISO PROLOG.
 
 ## Inference-based path search vs. Dijkstra encoded in PROLOG
 
