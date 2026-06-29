@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="resources/primer.css" media="screen"/>
+<link rel="stylesheet" href="resources/rec.css" media="screen"/>
+<link rel="stylesheet" href="resources/extra.css" media="screen"/>
+<link rel="stylesheet" href="resources/owl.css" media="screen"/>
+<link rel="stylesheet" href="resources/dark.css" media="(prefers-color-scheme: dark)"/>
+<link rel="stylesheet" href="resources/light.css" media="(prefers-color-scheme: light)"/>
+<link rel="stylesheet" href="resources/slider.css" media="screen"/>
+<meta name="color-scheme" content="dark light">
+<script type="module" src="resources/dark-mode-toggle.mjs"></script><div class="darkmode">
+	<dark-mode-toggle class="slider"></dark-mode-toggle>
+</div>
+ <title>RSM topology</title>
+
+
+<!-- SCHEMA.ORG METADATA -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","url":"https://cdm.ovh/rsm/topology/topo","image":"http://vowl.visualdataweb.org/webvowl/#iri=https://cdm.ovh/rsm/topology/topo","name":"RSM topology", "headline":"RSM topology provides fundamental railway network description, focused on connections and navigabilities between net elements. Net elements can be linear (embodied by lines or tracks) or non linear (embodied by stations, yards, or wider network areas). Geometry aspects are delegated to GeoSPARQL and are not essential to topology. Functional aspects (such as "current switch setting") also are not part of the topology.", "dateReleased":"Wed Jun 10 14:16:16 UTC 2026", "version":"error correction: navigableFromTransitive was not marked transitive", "license":"http://purl.org/NET/rdflicense/cc-by-sa4.0", "author":[{"@type":"Person","name":"Airy Magnien, UIC"}], "contributor":[{"@type":"Person","name":"Pierre Tane, UIC"}]}</script>
+
+<script src="resources/jquery.js"></script> 
+<script src="resources/marked.min.js"></script> 
+    <script> 
+function loadHash() {
+  jQuery(".markdown").each(function(el){jQuery(this).after(marked.parse(jQuery(this).text())).remove()});
+	var hash = location.hash;
+	if($(hash).offset()!=null){
+	  $('html, body').animate({scrollTop: $(hash).offset().top}, 0);
+}
+	loadTOC();
+}
+function loadTOC(){
+	//process toc dynamically
+	  var t='<h2>Table of contents</h2><ul>';i = 1;j=0;
+	  jQuery(".list").each(function(){
+		if(jQuery(this).is('h2')){
+			if(j>0){
+				t+='</ul>';
+				j=0;
+			}
+			t+= '<li>'+i+'. <a href=#'+ jQuery(this).attr('id')+'>'+ jQuery(this).ignore("span").text()+'</a></li>';
+			i++;
+		}
+		if(jQuery(this).is('h3')){
+			if(j==0){
+				t+='<ul>';
+			}
+			j++;
+			t+= '<li>'+(i-1)+'.'+j+'. '+'<a href=#'+ jQuery(this).attr('id')+'>'+ jQuery(this).ignore("span").text()+'</a></li>';
+		}
+	  });
+	  t+='</ul>';
+	  $("#toc").html(t); 
+}
+$(function(){
+    loadHash();
+}); $.fn.ignore = function(sel){
+        return this.clone().find(sel||">*").remove().end();
+ }; 
+   </script> 
+  </head> 
+
+<body>
+<div class="container">
+<div class="head">
+<div style="float:right">language <a href="index-en.html"><b>en</b></a> </div>
+<h1>RSM topology</h1>
+
+
+<dl>
+<dt>This version:</dt>
+<dd><a href="https://cdm.ovh/rsm/topology/1.0rc10/topo">https://cdm.ovh/rsm/topology/1.0rc10/topo</a></dd>
+<dt>Revision:</dt>
+<dd>error correction: navigableFromTransitive was not marked transitive</dd>
+<dt>Authors:</dt>
+<dd>Airy Magnien, UIC</dd>
+
+<dt>Contributors:</dt>
+<dd>Pierre Tane, UIC</dd>
+
+<dt>Imported Ontologies:</dt>
+<dd><a href="https://cdm.ovh/rsm/geosparql_adapter/rgeo">rgeo</a></dd>
+
+<dt>Download serialization:</dt><dd><span><a href="ontology.jsonld" target="_blank"><img src="https://img.shields.io/badge/Format-JSON_LD-blue.svg" alt="JSON-LD" /></a> </span><span><a href="ontology.owl" target="_blank"><img src="https://img.shields.io/badge/Format-RDF/XML-blue.svg" alt="RDF/XML" /></a> </span><span><a href="ontology.nt" target="_blank"><img src="https://img.shields.io/badge/Format-N_Triples-blue.svg" alt="N-Triples" /></a> </span><span><a href="ontology.ttl" target="_blank"><img src="https://img.shields.io/badge/Format-TTL-blue.svg" alt="TTL" /></a> </span></dd><dt>License:</dt><dd><a href="http://purl.org/NET/rdflicense/cc-by-sa4.0" target="_blank"><img src="https://img.shields.io/badge/License-Creative%20Commons%20CC_BY_SA-blue.svg" alt="http://purl.org/NET/rdflicense/cc-by-sa4.0" /></a>
+</dd><dt>Visualization:</dt><dd><a href="webvowl/index.html#" target="_blank"><img src="https://img.shields.io/badge/Visualize_with-WebVowl-blue.svg" alt="Visualize with WebVowl" /></a></dd>
+<!-- <dt>Evaluation:</dt><dd><a href="OOPSevaluation/oopsEval.html#" target="_blank"><img src="https://img.shields.io/badge/Evaluate_with-OOPS! (OntOlogy Pitfall Scanner!)-blue.svg" alt="Evaluate with OOPS!" /></a></dd> --><dt>Cite as:</dt>
+<dd>Airy Magnien, UIC. RSM topology. Revision: error correction: navigableFromTransitive was not marked transitive. Retrieved from: https://cdm.ovh/rsm/topology/1.0rc10/topo</dd>
+</dl>
+
+<a href="provenance/provenance-en.html" target="_blank">Provenance of this page</a><hr/>
+</div>
+<div class="status">
+<div>
+<span>Ontology Specification Draft</span>
+</div>
+</div>     <div id="abstract"><h2>Abstract</h2><span class="markdown">
+RSM topology provides fundamental railway network description, focused on connections and navigabilities between net elements. Net elements can be linear (embodied by lines or tracks) or non linear (embodied by stations, yards, or wider network areas). Geometry aspects are delegated to GeoSPARQL and are not essential to topology. Functional aspects (such as "current switch setting") also are not part of the topology.</span>
+</div>
+<div id="toc"></div>  
+
+<!--OVERVIEW SECTION-->
+    <div id="overview"><h2 id="overv" class="list">RSM topology: Overview <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<span class="markdown">
+This ontology has the following classes and properties.</span>
+<h4>Classes</h4>
+<ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#https://cdm.ovh/rsm/localisation/loca#BaseLocation"
+         title="https://cdm.ovh/rsm/localisation/loca#BaseLocation">
+         <span>Base Location</span>
+      </a>
+   </li>
+   <li>
+      <a href="#BoundaryElement"
+         title="https://cdm.ovh/rsm/topology/topo#BoundaryElement">Boundary element</a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature">Feature</a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry">Geometry</a>
+   </li>
+   <li>
+      <a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/localisation/loca#LinearLocation"
+         title="https://cdm.ovh/rsm/localisation/loca#LinearLocation">
+         <span>Linear Location</span>
+      </a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing">Linear thing</a>
+   </li>
+   <li>
+      <a href="#ListedPort" title="https://cdm.ovh/rsm/topology/topo#ListedPort">Listed port</a>
+   </li>
+   <li>
+      <a href="#Navigability" title="https://cdm.ovh/rsm/topology/topo#Navigability">Navigability</a>
+   </li>
+   <li>
+      <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a>
+   </li>
+   <li>
+      <a href="#NonlinearElement"
+         title="https://cdm.ovh/rsm/topology/topo#NonlinearElement">Nonlinear element</a>
+   </li>
+   <li>
+      <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a>
+   </li>
+</ul><h4>Object Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#connectedWith" title="https://cdm.ovh/rsm/topology/topo#connectedWith">connected with</a>
+   </li>
+   <li>
+      <a href="#connectedWithTransitive"
+         title="https://cdm.ovh/rsm/topology/topo#connectedWithTransitive">connected with transitive</a>
+   </li>
+   <li>
+      <a href="#destinationOfNavigability"
+         title="https://cdm.ovh/rsm/topology/topo#destinationOfNavigability">destination of navigability</a>
+   </li>
+   <li>
+      <a href="#fromPort" title="https://cdm.ovh/rsm/topology/topo#fromPort">from port</a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf">geometry of</a>
+   </li>
+   <li>
+      <a href="#http://www.opengis.net/ont/geosparql#hasDefaultGeometry"
+         title="http://www.opengis.net/ont/geosparql#hasDefaultGeometry">
+         <span>has Default Geometry</span>
+      </a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">has geometry</a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry">has nominal geometry</a>
+   </li>
+   <li>
+      <a href="#http://www.opengis.net/ont/geosparql#hasGeometry" title="http://www.opengis.net/ont/geosparql#hasGeometry">hasGeometry</a>
+   </li>
+   <li>
+      <a href="#leadsTo" title="https://cdm.ovh/rsm/topology/topo#leadsTo">leads to</a>
+   </li>
+   <li>
+      <a href="#navigableFrom" title="https://cdm.ovh/rsm/topology/topo#navigableFrom">navigable from</a>
+   </li>
+   <li>
+      <a href="#navigableFromTransitive"
+         title="https://cdm.ovh/rsm/topology/topo#navigableFromTransitive">navigable from transitive</a>
+   </li>
+   <li>
+      <a href="#navigableTo" title="https://cdm.ovh/rsm/topology/topo#navigableTo">navigable to</a>
+   </li>
+   <li>
+      <a href="#navigableToTransitive"
+         title="https://cdm.ovh/rsm/topology/topo#navigableToTransitive">navigable to transitive</a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf">nominal geometry of</a>
+   </li>
+   <li>
+      <a href="#nonNavigableFrom"
+         title="https://cdm.ovh/rsm/topology/topo#nonNavigableFrom">non navigable from</a>
+   </li>
+   <li>
+      <a href="#nonNavigableTo" title="https://cdm.ovh/rsm/topology/topo#nonNavigableTo">non navigable to</a>
+   </li>
+   <li>
+      <a href="#onElement" title="https://cdm.ovh/rsm/topology/topo#onElement">on element</a>
+   </li>
+   <li>
+      <a href="#oppositePort" title="https://cdm.ovh/rsm/topology/topo#oppositePort">opposite port</a>
+   </li>
+   <li>
+      <a href="#originOfNavigability"
+         title="https://cdm.ovh/rsm/topology/topo#originOfNavigability">origin of navigability</a>
+   </li>
+   <li>
+      <a href="#port" title="https://cdm.ovh/rsm/topology/topo#port">port</a>
+   </li>
+   <li>
+      <a href="#port0" title="https://cdm.ovh/rsm/topology/topo#port0">port 0</a>
+   </li>
+   <li>
+      <a href="#port1" title="https://cdm.ovh/rsm/topology/topo#port1">port 1</a>
+   </li>
+   <li>
+      <a href="#port0onElement" title="https://cdm.ovh/rsm/topology/topo#port0onElement">port0on element</a>
+   </li>
+   <li>
+      <a href="#port1onElement" title="https://cdm.ovh/rsm/topology/topo#port1onElement">port1on element</a>
+   </li>
+   <li>
+      <a href="#toPort" title="https://cdm.ovh/rsm/topology/topo#toPort">to port</a>
+   </li>
+</ul><h4>Data Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#http://www.opengis.net/ont/geosparql#hasMetricLength"
+         title="http://www.opengis.net/ont/geosparql#hasMetricLength">
+         <span>has Metric Length</span>
+      </a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength">has metric length</a>
+   </li>
+   <li>
+      <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength"
+         title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength">has nominal metric length</a>
+   </li>
+</ul><h4>Annotation Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/abstract" title="http://purl.org/dc/elements/1.1/abstract">
+         <span>abstract</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/contributor" title="http://purl.org/dc/elements/1.1/contributor">
+         <span>contributor</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/creator" title="http://purl.org/dc/elements/1.1/creator">
+         <span>creator</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/date" title="http://purl.org/dc/elements/1.1/date">
+         <span>date</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#definition" title="http://www.w3.org/2004/02/skos/core#definition">
+         <span>definition</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/description" title="http://purl.org/dc/elements/1.1/description">
+         <span>description</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/terms/license" title="http://purl.org/dc/terms/license">
+         <span>license</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/2004/02/skos/core#prefLabel" title="http://www.w3.org/2004/02/skos/core#prefLabel">
+         <span>pref Label</span>
+      </a>
+   </li>
+   <li>
+      <a href="#https://vocab.org/vann/preferredNamespacePrefix" title="https://vocab.org/vann/preferredNamespacePrefix">
+         <span>preferred Namespace Prefix</span>
+      </a>
+   </li>
+   <li>
+      <a href="#https://vocab.org/vann/preferredNamespaceURI" title="https://vocab.org/vann/preferredNamespaceURI">
+         <span>preferred Namespace U R I</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/source" title="http://purl.org/dc/elements/1.1/source">
+         <span>source</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/title" title="http://purl.org/dc/elements/1.1/title">
+         <span>title</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://purl.org/dc/elements/1.1/type" title="http://purl.org/dc/elements/1.1/type">
+         <span>type</span>
+      </a>
+   </li>
+</ul><iframe src="webvowl/index.html"></iframe> 
+</div>
+  
+
+<!--DESCRIPTION SECTION-->
+    <div id="description"><h2 id="desc" class="list">RSM topology: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+<span class="markdown">Full RSM topology. Connexities and Navigabilities as object properties . Additionally, navigability reification is included. Temporal aspects to be covered by annotations and/or named graphs and/or dul:Situations, or similar.
+
+Syntactic sugar: some properties that are most likely to be used are chained properties, equivalent to derived associations in UML.</span></div>
+   
+
+<!--CROSSREF SECTION-->
+   <div id="crossref"><h2 id="crossreference" class="list">Cross-reference for RSM topology classes, object properties and data properties <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+This section provides details for each class and property defined by RSM topology.
+<div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="classes">
+ <h3 id="classes-headline" class="list">Classes</h3>
+ <ul class="hlist">
+  <li><a href="#https://cdm.ovh/rsm/localisation/loca#BaseLocation" title="https://cdm.ovh/rsm/localisation/loca#BaseLocation"> <span>Base Location</span> </a></li>
+  <li><a href="#BoundaryElement" title="https://cdm.ovh/rsm/topology/topo#BoundaryElement">Boundary element</a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature">Feature</a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry">Geometry</a></li>
+  <li><a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a></li>
+  <li><a href="#https://cdm.ovh/rsm/localisation/loca#LinearLocation" title="https://cdm.ovh/rsm/localisation/loca#LinearLocation"> <span>Linear Location</span> </a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing">Linear thing</a></li>
+  <li><a href="#ListedPort" title="https://cdm.ovh/rsm/topology/topo#ListedPort">Listed port</a></li>
+  <li><a href="#Navigability" title="https://cdm.ovh/rsm/topology/topo#Navigability">Navigability</a></li>
+  <li><a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a></li>
+  <li><a href="#NonlinearElement" title="https://cdm.ovh/rsm/topology/topo#NonlinearElement">Nonlinear element</a></li>
+  <li><a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a></li>
+ </ul>
+ <div class="entity" id="https://cdm.ovh/rsm/localisation/loca#BaseLocation">
+  <h3>Base Location<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/localisation/loca#BaseLocation</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature">Feature</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/localisation/loca#LinearLocation" title="https://cdm.ovh/rsm/localisation/loca#LinearLocation">Linear Location</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="BoundaryElement">
+  <h3>Boundary element<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#BoundaryElement</p>
+  <div class="comment">
+   <span class="markdown">Linear element with length = 0. It still has two distinct ports, allowing to express connectivity and navigability (without losing directional information or the possibility to restrict navigation to a single direction). To be used at the borders of networks managed by different entities.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature">
+  <h3>Feature<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature</p>
+  <div class="comment">
+   <span class="markdown">A discrete spatial phenomenon in the CDM universe of discourse.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.opengis.net/ont/geosparql#Feature" target="_blank" title="http://www.opengis.net/ont/geosparql#Feature">Feature</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/localisation/loca#BaseLocation" title="https://cdm.ovh/rsm/localisation/loca#BaseLocation">Base Location</a> <sup class="type-c" title="class">c</sup>, <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a> <sup class="type-c" title="class">c</sup>, <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">has geometry</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry">
+  <h3>Geometry<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry</p>
+  <div class="comment">
+   <span class="markdown">The reference system can be geographic, geodetic, cartesian (e.g. engineering coordinate system), and its definition may be part of the WKT or GML string. See OGC documentation.</span>
+  </div>
+  <div class="comment">
+   <span class="markdown">A coherent set of direct positions in space. The positions are held within a Spatial Reference System (SRS).</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.opengis.net/ont/geosparql#Geometry" target="_blank" title="http://www.opengis.net/ont/geosparql#Geometry">Geometry</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">has geometry</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="LinearElement">
+  <h3>Linear element<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#LinearElement</p>
+  <div class="comment">
+   <span class="markdown">Any topology element that has exactly two extremities or " ports".</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing">Linear thing</a> <sup class="type-c" title="class">c</sup>, <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#BoundaryElement" title="https://cdm.ovh/rsm/topology/topo#BoundaryElement">Boundary element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength">has nominal metric length</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#port1" title="https://cdm.ovh/rsm/topology/topo#port1">port 1</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#NonlinearElement" title="https://cdm.ovh/rsm/topology/topo#NonlinearElement">Nonlinear element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/localisation/loca#LinearLocation">
+  <h3>Linear Location<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/localisation/loca#LinearLocation</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/localisation/loca#BaseLocation" title="https://cdm.ovh/rsm/localisation/loca#BaseLocation">Base Location</a> <sup class="type-c" title="class">c</sup>, <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing">Linear thing</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing">
+  <h3>Linear thing<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing</p>
+  <div class="comment">
+   <span class="markdown">" Abstract" class, introduced solely for the purpose of defining the domain of hasMetricLength in an OWL2-RL compatible way.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/localisation/loca#LinearLocation" title="https://cdm.ovh/rsm/localisation/loca#LinearLocation">Linear Location</a> <sup class="type-c" title="class">c</sup>, <a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength">has metric length</a> <sup class="type-dp" title="data property">dp</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="ListedPort">
+  <h3>Listed port<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#ListedPort</p>
+  <div class="comment">
+   <span class="markdown">A port in an ordered list (with successors; no contents needed). Can be used to sort the ports of a non-linear net element (e.g. clockwise from northmost). See also List ontology.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="https://cdm.ovh/rsm/list2/list2#OWLList" target="_blank" title="https://cdm.ovh/rsm/list2/list2#OWLList">O W L List</a> <sup class="type-c" title="class">c</sup>, <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="Navigability">
+  <h3>Navigability<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#Navigability</p>
+  <div class="comment">
+   <span class="markdown">Note: non-navigability and connexity reification are not proposed here, assuming that: 1. the authority lies with the properties (navigableTo, nonNavigableTo, connectedWith), and 2. navigabilities as individuals are useful for further modelling (switches...), while non-navigabilities and connexities as individuals do not appear to be equally useful.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#fromPort" title="https://cdm.ovh/rsm/topology/topo#fromPort">from port</a> <sup class="type-op" title="object property">op</sup>, <a href="#toPort" title="https://cdm.ovh/rsm/topology/topo#toPort">to port</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="NetElement">
+  <h3>Net element<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#NetElement</p>
+  <div class="comment">
+   <span class="markdown">Superclass for net elements (network elements)</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature">Feature</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a> <sup class="type-c" title="class">c</sup>, <a href="#NonlinearElement" title="https://cdm.ovh/rsm/topology/topo#NonlinearElement">Nonlinear element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#leadsTo" title="https://cdm.ovh/rsm/topology/topo#leadsTo">leads to</a> <sup class="type-op" title="object property">op</sup>, <a href="#port" title="https://cdm.ovh/rsm/topology/topo#port">port</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#leadsTo" title="https://cdm.ovh/rsm/topology/topo#leadsTo">leads to</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="NonlinearElement">
+  <h3>Nonlinear element<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#NonlinearElement</p>
+  <div class="comment">
+   <span class="markdown">Net element with any number of ports except two. Used for expressing connexities and navigabilities from or to a complex network area (e.g. a yard or a station).</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="Port">
+  <h3>Port<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#Port</p>
+  <div class="comment">
+   <span class="markdown">Any place, at the boundary of a net element, that can be an entry and/or exit point for rolling stock. In the case of linear elements, there are exactly two ports. In the case of a loop, the two ports of the loop ports coincide geographically (but for some tolerances) but remain distinct individuals, allowing to orient the loop if need be.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature">Feature</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#ListedPort" title="https://cdm.ovh/rsm/topology/topo#ListedPort">Listed port</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#connectedWithTransitive" title="https://cdm.ovh/rsm/topology/topo#connectedWithTransitive">connected with transitive</a> <sup class="type-op" title="object property">op</sup>, <a href="#navigableToTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableToTransitive">navigable to transitive</a> <sup class="type-op" title="object property">op</sup>, <a href="#nonNavigableTo" title="https://cdm.ovh/rsm/topology/topo#nonNavigableTo">non navigable to</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#connectedWithTransitive" title="https://cdm.ovh/rsm/topology/topo#connectedWithTransitive">connected with transitive</a> <sup class="type-op" title="object property">op</sup>, <a href="#fromPort" title="https://cdm.ovh/rsm/topology/topo#fromPort">from port</a> <sup class="type-op" title="object property">op</sup>, <a href="#navigableToTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableToTransitive">navigable to transitive</a> <sup class="type-op" title="object property">op</sup>, <a href="#nonNavigableTo" title="https://cdm.ovh/rsm/topology/topo#nonNavigableTo">non navigable to</a> <sup class="type-op" title="object property">op</sup>, <a href="#port" title="https://cdm.ovh/rsm/topology/topo#port">port</a> <sup class="type-op" title="object property">op</sup>, <a href="#toPort" title="https://cdm.ovh/rsm/topology/topo#toPort">to port</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="objectproperties">
+ <h3 id="properties" class="list">Object Properties</h3>
+ <ul class="hlist">
+  <li><a href="#connectedWith" title="https://cdm.ovh/rsm/topology/topo#connectedWith">connected with</a></li>
+  <li><a href="#connectedWithTransitive" title="https://cdm.ovh/rsm/topology/topo#connectedWithTransitive">connected with transitive</a></li>
+  <li><a href="#destinationOfNavigability" title="https://cdm.ovh/rsm/topology/topo#destinationOfNavigability">destination of navigability</a></li>
+  <li><a href="#fromPort" title="https://cdm.ovh/rsm/topology/topo#fromPort">from port</a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf">geometry of</a></li>
+  <li><a href="#http://www.opengis.net/ont/geosparql#hasDefaultGeometry" title="http://www.opengis.net/ont/geosparql#hasDefaultGeometry"> <span>has Default Geometry</span> </a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">has geometry</a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry">has nominal geometry</a></li>
+  <li><a href="#http://www.opengis.net/ont/geosparql#hasGeometry" title="http://www.opengis.net/ont/geosparql#hasGeometry">hasGeometry</a></li>
+  <li><a href="#leadsTo" title="https://cdm.ovh/rsm/topology/topo#leadsTo">leads to</a></li>
+  <li><a href="#navigableFrom" title="https://cdm.ovh/rsm/topology/topo#navigableFrom">navigable from</a></li>
+  <li><a href="#navigableFromTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableFromTransitive">navigable from transitive</a></li>
+  <li><a href="#navigableTo" title="https://cdm.ovh/rsm/topology/topo#navigableTo">navigable to</a></li>
+  <li><a href="#navigableToTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableToTransitive">navigable to transitive</a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf">nominal geometry of</a></li>
+  <li><a href="#nonNavigableFrom" title="https://cdm.ovh/rsm/topology/topo#nonNavigableFrom">non navigable from</a></li>
+  <li><a href="#nonNavigableTo" title="https://cdm.ovh/rsm/topology/topo#nonNavigableTo">non navigable to</a></li>
+  <li><a href="#onElement" title="https://cdm.ovh/rsm/topology/topo#onElement">on element</a></li>
+  <li><a href="#oppositePort" title="https://cdm.ovh/rsm/topology/topo#oppositePort">opposite port</a></li>
+  <li><a href="#originOfNavigability" title="https://cdm.ovh/rsm/topology/topo#originOfNavigability">origin of navigability</a></li>
+  <li><a href="#port" title="https://cdm.ovh/rsm/topology/topo#port">port</a></li>
+  <li><a href="#port0" title="https://cdm.ovh/rsm/topology/topo#port0">port 0</a></li>
+  <li><a href="#port1" title="https://cdm.ovh/rsm/topology/topo#port1">port 1</a></li>
+  <li><a href="#port0onElement" title="https://cdm.ovh/rsm/topology/topo#port0onElement">port0on element</a></li>
+  <li><a href="#port1onElement" title="https://cdm.ovh/rsm/topology/topo#port1onElement">port1on element</a></li>
+  <li><a href="#toPort" title="https://cdm.ovh/rsm/topology/topo#toPort">to port</a></li>
+ </ul>
+ <div class="entity" id="connectedWith">
+  <h3>connected with<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#connectedWith</p>
+  <div class="comment">
+   <span class="markdown">Relation between a port on a net element and an adjacent port on another net element. This is a symmetric relation. Geographic locations of related ports may not coincide exactly, either because of constructive tolerances (abutted tracks...), or uncertainties, or rounding errors, or by construction (e.g. case of tracks joined via a turntable).</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> symmetric</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#connectedWithTransitive" title="https://cdm.ovh/rsm/topology/topo#connectedWithTransitive">connected with transitive</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="connectedWithTransitive">
+  <h3>connected with transitive<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#connectedWithTransitive</p>
+  <div class="comment">
+   <span class="markdown">transitive closure of connectedWith.</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> transitive</p>
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#connectedWith" title="https://cdm.ovh/rsm/topology/topo#connectedWith">connected with</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="destinationOfNavigability">
+  <h3>destination of navigability<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#destinationOfNavigability</p>
+  <div class="description">
+   <p><strong>has characteristics: </strong> inverse functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd></dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="fromPort">
+  <h3>from port<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#fromPort</p>
+  <div class="comment">
+   <span class="markdown">Port from which the navigability relation starts: conventionally, the "exit port" from which a running train leaves a net element.</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional</p>
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Navigability" title="https://cdm.ovh/rsm/topology/topo#Navigability">Navigability</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf">
+  <h3>geometry of<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf</p>
+  <div class="comment">
+   <span class="markdown">GeoSPARQL does not define this inverse property.</span>
+  </div>
+  <div class="comment">
+   <span class="markdown">inverse of hasGeometry</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional</p>
+   <dl>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">has geometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://www.opengis.net/ont/geosparql#hasDefaultGeometry">
+  <h3>has Default Geometry<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.opengis.net/ont/geosparql#hasDefaultGeometry</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://www.opengis.net/ont/geosparql#hasGeometry" title="http://www.opengis.net/ont/geosparql#hasGeometry">hasGeometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry">has nominal geometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">
+  <h3>has geometry<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry</p>
+  <div class="comment">
+   <span class="markdown">A spatial representation for a given Feature. As in GeoSPARQL, a feature can be associated with more than one geometry (valid at different times, or provided by different surveys...).</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> inverse functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://www.opengis.net/ont/geosparql#hasGeometry" title="http://www.opengis.net/ont/geosparql#hasGeometry">hasGeometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry">has nominal geometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Feature">Feature</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#Geometry">Geometry</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#geometryOf">geometry of</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry">
+  <h3>has nominal geometry<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry</p>
+  <div class="comment">
+   <span class="markdown">The default Geometry to be used in spatial calculations. It is usually the most detailed Geometry. Takes into account SOSA/SSN viewpoint, i.e. there can be more than one default geometry (e.g. valid at different times).</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional, inverse functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://www.opengis.net/ont/geosparql#hasDefaultGeometry" title="http://www.opengis.net/ont/geosparql#hasDefaultGeometry">has Default Geometry</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">has geometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf">nominal geometry of</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://www.opengis.net/ont/geosparql#hasGeometry">
+  <h3>hasGeometry<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.opengis.net/ont/geosparql#hasGeometry</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#http://www.opengis.net/ont/geosparql#hasDefaultGeometry" title="http://www.opengis.net/ont/geosparql#hasDefaultGeometry">has Default Geometry</a> <sup class="type-op" title="object property">op</sup>, <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasGeometry">has geometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://www.opengis.net/ont/geosparql#Feature" target="_blank" title="http://www.opengis.net/ont/geosparql#Feature">Feature</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.opengis.net/ont/geosparql#Geometry" target="_blank" title="http://www.opengis.net/ont/geosparql#Geometry">Geometry</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="leadsTo">
+  <h3>leads to<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#leadsTo</p>
+  <div class="comment">
+   <span class="markdown">relation between net elements (adjacent or not), where rolling stock may leave an element (subject) and reach another element (object) without reversing travel direction. This property is derived from navigableToTransitive, but is itself not transitive.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has sub-property chains
+    </dt>
+    <dd>
+     <a href="#port" title="https://cdm.ovh/rsm/topology/topo#port">port</a> <sup class="type-op" title="object property">op</sup> <span class="logic">o</span> <a href="#navigableToTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableToTransitive">navigable to transitive</a> <sup class="type-op" title="object property">op</sup> <span class="logic">o</span> <a href="#onElement" title="https://cdm.ovh/rsm/topology/topo#onElement">on element</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="navigableFrom">
+  <h3>navigable from<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#navigableFrom</p>
+  <div class="comment">
+   <span class="markdown">inverse of navigable to</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#navigableFromTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableFromTransitive">navigable from transitive</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#navigableTo" title="https://cdm.ovh/rsm/topology/topo#navigableTo">navigable to</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="navigableFromTransitive">
+  <h3>navigable from transitive<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#navigableFromTransitive</p>
+  <div class="comment">
+   <span class="markdown">inverse of navigable to transitive</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> transitive</p>
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#navigableFrom" title="https://cdm.ovh/rsm/topology/topo#navigableFrom">navigable from</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#navigableToTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableToTransitive">navigable to transitive</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="navigableTo">
+  <h3>navigable to<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#navigableTo</p>
+  <div class="comment">
+   <span class="markdown">Expresses the possibility, for a train movement, to leave a net element via an exit port and to navigate to another net element until another exit port. Here, navigation excludes reversal of travel direction, even if the reversal is otherwise allowed by operational rules (e.g. shunting mode, ...).</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#navigableToTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableToTransitive">navigable to transitive</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#navigableFrom" title="https://cdm.ovh/rsm/topology/topo#navigableFrom">navigable from</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="navigableToTransitive">
+  <h3>navigable to transitive<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#navigableToTransitive</p>
+  <div class="comment">
+   <span class="markdown">transitive closure of navigableTo</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> transitive</p>
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#navigableTo" title="https://cdm.ovh/rsm/topology/topo#navigableTo">navigable to</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#navigableFromTransitive" title="https://cdm.ovh/rsm/topology/topo#navigableFromTransitive">navigable from transitive</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf">
+  <h3>nominal geometry of<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#nominalGeometryOf</p>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional, inverse functional</p>
+   <dl>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalGeometry">has nominal geometry</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="nonNavigableFrom">
+  <h3>non navigable from<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#nonNavigableFrom</p>
+  <div class="comment">
+   <span class="markdown">inverse of non navigable to</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#nonNavigableTo" title="https://cdm.ovh/rsm/topology/topo#nonNavigableTo">non navigable to</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="nonNavigableTo">
+  <h3>non navigable to<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#nonNavigableTo</p>
+  <div class="comment">
+   <span class="markdown">Expresses that there is no navigability link between the related ports. Given the OWA (open world assumption), a navigability not expressed does not mean "non navigability". Consequently, non-navigability should be explicitly stated when it is known, as it is fundamental knowledge about the network layout.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#nonNavigableFrom" title="https://cdm.ovh/rsm/topology/topo#nonNavigableFrom">non navigable from</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="onElement">
+  <h3>on element<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#onElement</p>
+  <div class="comment">
+   <span class="markdown">inverse of port, port0, port1</span>
+  </div>
+ </div>
+ <div class="entity" id="oppositePort">
+  <h3>opposite port<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#oppositePort</p>
+  <div class="comment">
+   <span class="markdown">Opposite port on a linear element; a symmetric property. Not meaningful if element is non-linear.</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> symmetric</p>
+   <dl>
+    <dt>
+     has sub-property chains
+    </dt>
+    <dd>
+     <a href="#port0onElement" title="https://cdm.ovh/rsm/topology/topo#port0onElement">port0on element</a> <sup class="type-op" title="object property">op</sup> <span class="logic">o</span> <a href="#port1" title="https://cdm.ovh/rsm/topology/topo#port1">port 1</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="originOfNavigability">
+  <h3>origin of navigability<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#originOfNavigability</p>
+  <div class="description">
+   <p><strong>has characteristics: </strong> inverse functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd></dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="port">
+  <h3>port<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#port</p>
+  <div class="comment">
+   <span class="markdown">Associated ports with net elements. This is an inverse functional property, meaning that a port can belong to at most one net element (if a port is found to belong to two net elements, the inference is that those two elements are the same).</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> inverse functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd></dd>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#port0" title="https://cdm.ovh/rsm/topology/topo#port0">port 0</a> <sup class="type-op" title="object property">op</sup>, <a href="#port1" title="https://cdm.ovh/rsm/topology/topo#port1">port 1</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#NetElement" title="https://cdm.ovh/rsm/topology/topo#NetElement">Net element</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="port0">
+  <h3>port 0<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#port0</p>
+  <div class="comment">
+   <span class="markdown">First port of some net element. Allows to orient linear elements in space, even though linear elements may be completely symmetrical from a functional point of view. Linear element orientation can be arbitray, or become a matter of conventions. This property also be used on non-linear elements, with undefined semantics.</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional, inverse functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#port" title="https://cdm.ovh/rsm/topology/topo#port">port</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="port1">
+  <h3>port 1<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#port1</p>
+  <div class="comment">
+   <span class="markdown">points to the other port of a linear element. Only meaningful for linear elements.</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional, inverse functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#port" title="https://cdm.ovh/rsm/topology/topo#port">port</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="port0onElement">
+  <h3>port0on element<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#port0onElement</p>
+ </div>
+ <div class="entity" id="port1onElement">
+  <h3>port1on element<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#port1onElement</p>
+ </div>
+ <div class="entity" id="toPort">
+  <h3>to port<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/topology/topo#toPort</p>
+  <div class="comment">
+   <span class="markdown">Designates the exit port a running train can reach on a net element. Note: the entry port on that element is provided by a connectedTo property.</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional</p>
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Navigability" title="https://cdm.ovh/rsm/topology/topo#Navigability">Navigability</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Port" title="https://cdm.ovh/rsm/topology/topo#Port">Port</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="dataproperties">
+ <h3 id="dataproperties-headline" class="list">Data Properties</h3>
+ <ul class="hlist">
+  <li><a href="#http://www.opengis.net/ont/geosparql#hasMetricLength" title="http://www.opengis.net/ont/geosparql#hasMetricLength"> <span>has Metric Length</span> </a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength">has metric length</a></li>
+  <li><a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength">has nominal metric length</a></li>
+ </ul>
+ <div class="entity" id="http://www.opengis.net/ont/geosparql#hasMetricLength">
+  <h3>has Metric Length<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.opengis.net/ont/geosparql#hasMetricLength</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength">has metric length</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://www.opengis.net/ont/geosparql#SpatialObject" target="_blank" title="http://www.opengis.net/ont/geosparql#SpatialObject">Spatial Object</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength">
+  <h3>has metric length<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength</p>
+  <div class="comment">
+   <span class="markdown">Length (in meter) of a Linear Element.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://www.opengis.net/ont/geosparql#hasMetricLength" title="http://www.opengis.net/ont/geosparql#hasMetricLength">has Metric Length</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength">has nominal metric length</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#LinearThing">Linear thing</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength">
+  <h3>has nominal metric length<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasNominalMetricLength</p>
+  <div class="comment">
+   <span class="markdown">This length is assumed to be derived from the chosen Nominal Geometry. The Nominal Metric Length is supposed to be used for conversions between linear referencing methods "absolute" (distance along, e.g. used in CCS/TMS data model) and "interpolation" (intrinsic coordinates, with values 0 to 1, used in RSM and others).</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional</p>
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength" title="https://cdm.ovh/rsm/geosparql_adapter/rgeo#hasMetricLength">has metric length</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#LinearElement" title="https://cdm.ovh/rsm/topology/topo#LinearElement">Linear element</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="annotationproperties">
+ <h3 id="annotationproperties" class="list">Annotation Properties</h3>
+ <ul class="hlist">
+  <li><a href="#http://purl.org/dc/elements/1.1/abstract" title="http://purl.org/dc/elements/1.1/abstract"> <span>abstract</span> </a></li>
+  <li><a href="#http://purl.org/dc/elements/1.1/contributor" title="http://purl.org/dc/elements/1.1/contributor"> <span>contributor</span> </a></li>
+  <li><a href="#http://purl.org/dc/elements/1.1/creator" title="http://purl.org/dc/elements/1.1/creator"> <span>creator</span> </a></li>
+  <li><a href="#http://purl.org/dc/elements/1.1/date" title="http://purl.org/dc/elements/1.1/date"> <span>date</span> </a></li>
+  <li><a href="#http://www.w3.org/2004/02/skos/core#definition" title="http://www.w3.org/2004/02/skos/core#definition"> <span>definition</span> </a></li>
+  <li><a href="#http://purl.org/dc/elements/1.1/description" title="http://purl.org/dc/elements/1.1/description"> <span>description</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/license" title="http://purl.org/dc/terms/license"> <span>license</span> </a></li>
+  <li><a href="#http://www.w3.org/2004/02/skos/core#prefLabel" title="http://www.w3.org/2004/02/skos/core#prefLabel"> <span>pref Label</span> </a></li>
+  <li><a href="#https://vocab.org/vann/preferredNamespacePrefix" title="https://vocab.org/vann/preferredNamespacePrefix"> <span>preferred Namespace Prefix</span> </a></li>
+  <li><a href="#https://vocab.org/vann/preferredNamespaceURI" title="https://vocab.org/vann/preferredNamespaceURI"> <span>preferred Namespace U R I</span> </a></li>
+  <li><a href="#http://purl.org/dc/elements/1.1/source" title="http://purl.org/dc/elements/1.1/source"> <span>source</span> </a></li>
+  <li><a href="#http://purl.org/dc/elements/1.1/title" title="http://purl.org/dc/elements/1.1/title"> <span>title</span> </a></li>
+  <li><a href="#http://purl.org/dc/elements/1.1/type" title="http://purl.org/dc/elements/1.1/type"> <span>type</span> </a></li>
+ </ul>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/abstract">
+  <h3>abstract<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/abstract</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/contributor">
+  <h3>contributor<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/contributor</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/creator">
+  <h3>creator<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/creator</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/date">
+  <h3>date<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/date</p>
+ </div>
+ <div class="entity" id="http://www.w3.org/2004/02/skos/core#definition">
+  <h3>definition<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.w3.org/2004/02/skos/core#definition</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/description">
+  <h3>description<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/description</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/license">
+  <h3>license<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/license</p>
+ </div>
+ <div class="entity" id="http://www.w3.org/2004/02/skos/core#prefLabel">
+  <h3>pref Label<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.w3.org/2004/02/skos/core#prefLabel</p>
+ </div>
+ <div class="entity" id="https://vocab.org/vann/preferredNamespacePrefix">
+  <h3>preferred Namespace Prefix<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://vocab.org/vann/preferredNamespacePrefix</p>
+ </div>
+ <div class="entity" id="https://vocab.org/vann/preferredNamespaceURI">
+  <h3>preferred Namespace U R I<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://vocab.org/vann/preferredNamespaceURI</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/source">
+  <h3>source<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/source</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/title">
+  <h3>title<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/title</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/elements/1.1/type">
+  <h3>type<sup class="type-ap" title="annotation property">ap</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/elements/1.1/type</p>
+ </div>
+</div><div id="legend">
+<h2>Legend <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div   class="entity">
+<sup class="type-c" title="Classes">c</sup>: Classes <br/>
+<sup class="type-op" title="Object Properties">op</sup>: Object Properties <br/>
+<sup class="type-dp" title="Data Properties">dp</sup>: Data Properties <br/>
+</div>
+</div>
+</div>
+<div id="acknowledgments">
+<h2 id="ack" class="list">Acknowledgments <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<p>
+The authors would like to thank <a href="http://www.essepuntato.it/">Silvio Peroni</a> for developing <a href="http://www.essepuntato.it/lode">LODE</a>, a Live OWL Documentation Environment, which is used for representing the Cross Referencing Section of this document and <a href="https://w3id.org/people/dgarijo">Daniel Garijo</a> for developing <a href="https://github.com/dgarijo/Widoco">Widoco</a>, the program used to create the template used in this documentation.</p>
+</div>
+
+
+</div>
+</body>
+</html>
