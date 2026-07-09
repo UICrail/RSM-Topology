@@ -6,9 +6,11 @@ Ontology for the railway network topology. This is part of sRSM (semantic Rail S
 
 ## Fundamental feature
 
-sRSM basically represents the network as a "line graph": the graph nodes are linear elements; the graph edges are immaterial and express the connections between linear elements. Every physical part of the network is a graph node. This representation can be opposed to the seemingly more intuitive representation (see e.g. OpenStreetMap) where nodes are junctions and edges are track segments.
+sRSM basically represents the network as a "line graph": the graph nodes are linear elements; the graph edges are immaterial and express the connections between linear elements. Every physical part of the network is a graph node. This representation can be opposed to the seemingly more intuitive representation (see e.g. OpenStreetMap) where nodes are junctions (switches, crossings) or end points (buffers...) and edges are track segments joining the nodes.
 
 The line graph paradigm of RTM/RSM (IRS30110) met some success, as it was subsequently adopted by railML3 (forking RTM), the RINF Ontology of the European Railway Agency, etc.
+
+> Note: switches and crossings are not part of the RTM/RSM or sRSM topology. They are technical devices allowing rolling stock to actually move from a linear element to the next. Switches can be described separately (see Track Functional ontology) and can be mapped to parts of linear elements; for instance, a switch panel (the physical instance) may extend over parts of three different linear elements (an incoming track on toe side, and on heel side, a through track and a diverted track).
 
 ## Levels of detail
 
