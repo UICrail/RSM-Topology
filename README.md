@@ -2,6 +2,13 @@
 
 Ontology for the railway network topology. This is part of sRSM (semantic Rail System Model), the successor of RTM/RSM (IRS30100).
 
+The purpose of the railway network topology is to provide an elementary description of the network layout, to which any asset can be related:
+
+* material assets: tracks, switches, tunnels, signals, overhead contact lines...
+* immaterial assets: movement authorities, temporary speed restrictions, radio coverage area...
+
+As the term "topology" suggests, the information carried by topology is "how are net elements related to each other". Geometric information is not the primary information, but it can be added using the GeoSPARQL ontology, allowing schematic or geographic representations.
+
 # Main features
 
 ## Fundamental feature
